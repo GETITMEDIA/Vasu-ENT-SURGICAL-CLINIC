@@ -520,6 +520,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-left: auto;
 }
 
 .nav-item {
@@ -558,6 +559,11 @@ textarea:focus-visible {
 
 .nav-cta {
   margin-left: 10px;
+}
+
+.nav-cta .btn {
+  padding-left: 36px;
+  padding-right: 36px;
 }
 
 .nav-actions {

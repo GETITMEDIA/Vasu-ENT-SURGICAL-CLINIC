@@ -1,37 +1,119 @@
 /* ==========================================================================
-   VASU ENT SURGICAL CLINIC — Responsive rules
-   Breakpoints: 1200 / 992 / 768 / 576
+   VASU ENT SURGICAL CLINIC — Responsive Stylesheet
+   Breakpoints:
+     1400px  — Large desktop (XL)
+     1200px  — Laptop / small desktop
+      992px  — Tablet landscape
+      768px  — Tablet portrait / large mobile
+      576px  — Mobile
+      400px  — Small mobile
    ========================================================================== */
 
-/* ----- Laptop / small desktop ----- */
-@media (max-width: 1200px) {
+/* ==========================================================================
+   Base responsive utilities (apply at all sizes)
+   ========================================================================== */
+html {
+  font-size: clamp(15px, calc(15px + 0.13vw), 16px);
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Large Desktop (max-width: 1400px)
+   ========================================================================== */
+@media (max-width: 1400px) {
   .container {
-    padding-inline: 20px;
+    padding-inline: 28px;
   }
 
   .hero-grid {
-    gap: 30px;
+    gap: 36px;
+  }
+
+  .hero-float-card.card-1 {
+    left: -16px;
+  }
+
+  .hero-float-card.card-2 {
+    right: -14px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1.3fr 0.9fr 1fr 1.1fr;
+    gap: 36px;
+  }
+}
+
+/* ==========================================================================
+   Laptop / Small Desktop (max-width: 1200px)
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .container {
+    padding-inline: 24px;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero-float-card {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .hero-float-card.card-1 {
+    left: -8px;
+    top: 20px;
+  }
+
+  .hero-float-card.card-2 {
+    right: -8px;
+    bottom: 20px;
   }
 
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
   }
 
   .stats-strip {
     grid-template-columns: repeat(2, 1fr);
     row-gap: 34px;
+    padding: 46px 36px;
   }
 
   .footer-top {
     grid-template-columns: 1fr 1fr;
     row-gap: 44px;
   }
+
+  .split-section {
+    gap: 48px;
+  }
+
+  .specialty-content-grid {
+    gap: 36px;
+  }
+
+  .doctor-info {
+    padding: 36px 32px;
+  }
 }
 
-/* ----- Tablet ----- */
+/* ==========================================================================
+   Tablet Landscape (max-width: 992px)
+   ========================================================================== */
 @media (max-width: 992px) {
   :root {
-    --header-height: 76px;
+    --header-height: 72px;
   }
 
   .site-header {
@@ -41,22 +123,17 @@
     width: 100%;
     max-width: 100%;
     border-radius: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.97);
     border: none;
-    border-bottom: 1px solid rgba(0, 119, 182, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid rgba(0, 119, 182, 0.09);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 2px 16px rgba(2, 62, 92, 0.07);
     height: var(--header-height);
   }
 
-  .site-header .brand-name {
-    color: var(--color-primary-dark);
-  }
-
-  .site-header .brand-tag {
-    color: var(--color-secondary);
-  }
+  .site-header .brand-name { color: var(--color-primary-dark); }
+  .site-header .brand-tag  { color: var(--color-secondary); }
 
   .site-header .nav-link {
     color: var(--color-text);
@@ -72,20 +149,13 @@
     color: var(--color-text);
   }
 
-  .section {
-    padding: 76px 0;
-  }
+  .nav-phone { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-cta { display: block; }
 
-  .nav-phone {
-    display: none;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-cta {
-    display: none;
+  .nav-cta .btn {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .nav-menu {
@@ -97,33 +167,84 @@
     background: #fff;
     flex-direction: column;
     align-items: stretch;
-    padding: 110px 28px 40px;
-    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.15);
+    padding: 0 0 40px; /* drawer-header provides top spacing */
+    box-shadow: -24px 0 64px rgba(0, 0, 0, 0.13);
     transform: translateX(100%);
     transition: transform var(--transition);
     overflow-y: auto;
-    gap: 4px;
+    overflow-x: hidden;
+    gap: 0;
     display: flex;
+    z-index: 1001; /* above site-header so drawer is fully self-contained */
   }
 
-  .nav-menu:not(.is-open) {
-    transform: translateX(100%);
+  /* ---- Drawer header: logo + close button ---- */
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    flex-shrink: 0;
   }
 
-  .nav-menu.is-open {
-    transform: translateX(0);
+  .drawer-header .brand-name {
+    color: var(--color-primary-dark);
+    font-size: 0.98rem;
   }
 
+  .drawer-header .brand-tag {
+    color: var(--color-secondary);
+  }
+
+  .drawer-header .brand-emblem {
+    width: 36px;
+    height: 36px;
+  }
+
+  .drawer-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 119, 182, 0.07);
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+    cursor: pointer;
+    border: none;
+  }
+
+  .drawer-close:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+
+  /* Nav items get their own padding container now */
   .nav-item {
     width: 100%;
+    padding-inline: 20px;
   }
+
+  .nav-menu:not(.is-open) { transform: translateX(100%); }
+  .nav-menu.is-open        { transform: translateX(0); }
+
+  /* .nav-item already gets padding-inline: 20px from above */
 
   .nav-link {
     width: 100%;
     justify-content: space-between;
-    padding: 15px 6px;
+    padding: 14px 4px;
     border-bottom: 1px solid var(--color-border);
     border-radius: 0;
+    font-size: 1rem;
   }
 
   .mega-menu {
@@ -132,12 +253,15 @@
     width: 100%;
     box-shadow: none;
     border: none;
-    padding: 6px 0 6px 16px;
+    padding: 8px 0 8px 18px;
     display: none;
     grid-template-columns: 1fr;
     opacity: 1;
     visibility: visible;
-    gap: 18px;
+    pointer-events: auto;
+    gap: 14px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .nav-item.has-mega.is-open .mega-menu {
@@ -146,27 +270,50 @@
   }
 
   .mobile-menu-actions {
-    margin-top: 20px;
+    margin-top: 24px;
+    margin-inline: 20px;
     flex-direction: column;
     gap: 12px;
-  }
-
-  .nav-menu .mobile-menu-actions {
     display: flex;
   }
 
+  .section { padding: 76px 0; }
+  .section--tight { padding: 54px 0; }
+
   .hero {
-    padding-top: calc(var(--header-height) + 30px);
+    padding-top: calc(var(--header-height) + 36px);
+    padding-bottom: 60px;
+    min-height: unset;
   }
 
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 
   .hero-visual {
-    max-width: 460px;
+    max-width: 440px;
     margin-inline: auto;
     order: -1;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-desc {
+    margin-inline: auto;
+    max-width: 540px;
+  }
+
+  .hero-actions,
+  .hero-trust {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .carousel-ctrl {
@@ -176,26 +323,19 @@
     height: 38px;
   }
 
-  .hero-stats {
-    justify-content: center;
+  .hero-float-card.card-1 {
+    left: 0;
+    top: 16px;
   }
 
-  .hero-content {
-    text-align: center;
-  }
-
-  .hero-desc {
-    margin-inline: auto;
-  }
-
-  .hero-actions,
-  .hero-trust {
-    justify-content: center;
+  .hero-float-card.card-2 {
+    right: 0;
+    bottom: 16px;
   }
 
   .split-section {
     grid-template-columns: 1fr;
-    gap: 46px;
+    gap: 44px;
   }
 
   .split-visual {
@@ -203,12 +343,24 @@
     margin-inline: auto;
   }
 
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .split-badge {
+    right: -12px;
+    bottom: -18px;
+    padding: 16px 20px;
+    min-width: 120px;
   }
 
-  .location-card {
-    grid-template-columns: 1fr;
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .stats-strip {
+    padding: 40px 28px;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(50% - 13px);
   }
 
   .gallery-grid {
@@ -216,8 +368,20 @@
     grid-auto-rows: 160px;
   }
 
-  .testimonial-card {
-    flex: 0 0 calc(50% - 13px);
+  .location-card {
+    grid-template-columns: 1fr;
+  }
+
+  .location-info {
+    padding: 40px 36px;
+  }
+
+  .location-map {
+    min-height: 320px;
+  }
+
+  .location-map iframe {
+    min-height: 320px;
   }
 
   .doctor-card {
@@ -225,49 +389,90 @@
   }
 
   .doctor-photo {
-    min-height: 280px;
+    min-height: 300px;
+    max-height: 380px;
   }
 
-  .specialty-content-grid {
-    grid-template-columns: 1fr;
+  .doctor-info {
+    padding: 36px 28px;
   }
 
   .cta-banner {
     flex-direction: column;
     text-align: center;
-    padding: 48px 32px;
+    padding: 48px 36px;
+    gap: 32px;
   }
 
   .cta-banner-text p {
     max-width: none;
   }
 
+  .cta-banner-actions {
+    justify-content: center;
+  }
+
+  .specialty-content-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
   .form-card {
-    padding: 34px 26px;
+    padding: 36px 28px;
+  }
+
+  .page-hero {
+    padding: calc(var(--header-height) + 50px) 0 70px;
+  }
+
+  .page-hero--about,
+  .page-hero--contact {
+    padding: calc(var(--header-height) + 60px) 0 80px;
   }
 }
 
-/* ----- Mobile ----- */
+/* ==========================================================================
+   Tablet Portrait / Large Mobile (max-width: 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
-  .section {
-    padding: 60px 0;
-  }
-  .section--tight {
-    padding: 46px 0;
+  :root {
+    --header-height: 68px;
   }
 
-
-  .brand-name {
-    font-size: 1rem;
+  .section-title {
+    font-size: clamp(1.65rem, 5.5vw, 2.2rem);
   }
+
+  .page-hero-title {
+    font-size: clamp(1.7rem, 5.8vw, 2.4rem);
+  }
+
+  .section { padding: 60px 0; }
+  .section--tight { padding: 46px 0; }
+
+  .section-head {
+    margin-bottom: 40px;
+  }
+
+  .brand-name { font-size: 1rem; }
+  .brand-tag  { font-size: 0.62rem; }
 
   .nav-menu {
     width: 100vw;
+    padding-inline: 20px;
   }
 
   .hero {
     min-height: auto;
-    padding-bottom: 70px;
+    padding-bottom: 56px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 6.5vw, 2.8rem);
+  }
+
+  .hero-desc {
+    font-size: 0.97rem;
   }
 
   .hero-float-card {
@@ -275,33 +480,57 @@
   }
 
   .hero-trust {
+    gap: 12px 16px;
+  }
+
+  .hero-trust-item {
+    padding: 8px 14px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
     gap: 18px;
   }
 
-  .features-grid,
+  .feature-card {
+    padding: 28px 24px;
+  }
+
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .stats-strip {
     grid-template-columns: 1fr 1fr;
-    padding: 40px 24px;
+    padding: 36px 20px;
+    gap: 24px 16px;
+    border-radius: var(--radius-md);
   }
 
-  .footer-top {
-    grid-template-columns: 1fr;
-    row-gap: 40px;
-    padding-bottom: 40px;
+  .split-section {
+    gap: 36px;
   }
 
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
+  .split-visual {
+    max-width: 100%;
+  }
+
+  .split-badge {
+    right: 12px;
+    bottom: -20px;
+    padding: 14px 18px;
+    min-width: 110px;
+  }
+
+  .split-badge .num {
+    font-size: 1.8rem;
   }
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 150px;
+    gap: 12px;
   }
 
   .gallery-item.span-2 {
@@ -313,21 +542,52 @@
     flex: 0 0 100%;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .location-info {
+    padding: 32px 24px;
   }
 
-  .form-group {
-    margin-bottom: 18px;
+  .location-map {
+    min-height: 280px;
+  }
+
+  .location-map iframe {
+    min-height: 280px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .cta-banner {
+    padding: 40px 24px;
+    border-radius: var(--radius-md);
   }
 
   .cta-banner-actions {
     flex-direction: column;
     width: 100%;
+    gap: 12px;
   }
 
   .cta-banner-actions .btn {
     width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
   }
 
   .specialty-tabs {
@@ -336,18 +596,22 @@
     -webkit-overflow-scrolling: touch;
     top: calc(var(--header-height) + 6px);
     border-radius: var(--radius-md);
+    padding: 10px;
+    gap: 8px;
   }
 
-  .specialty-tabs::-webkit-scrollbar {
-    display: none;
-  }
+  .specialty-tabs::-webkit-scrollbar { display: none; }
 
   .specialty-tab {
     flex-shrink: 0;
+    padding: 9px 16px;
+    font-size: 0.82rem;
   }
 
   .specialty-banner {
-    padding: 34px 26px;
+    padding: 32px 24px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .back-to-top {
@@ -363,54 +627,233 @@
     bottom: 20px;
     left: 20px;
   }
+
+  .page-hero {
+    padding: calc(var(--header-height) + 36px) 0 56px;
+  }
+
+  .page-hero--about,
+  .page-hero--contact {
+    padding: calc(var(--header-height) + 42px) 0 60px;
+  }
+
+  .doctor-photo {
+    min-height: 260px;
+    max-height: 300px;
+  }
+
+  .booking-info-card {
+    padding: 34px 26px;
+  }
+
+  .timeline {
+    padding-left: 28px;
+  }
 }
 
-/* ----- Small mobile ----- */
+/* ==========================================================================
+   Mobile (max-width: 576px)
+   ========================================================================== */
 @media (max-width: 576px) {
+  :root {
+    --header-height: 64px;
+  }
+
   .container {
     padding-inline: 16px;
   }
 
+  .section-title {
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
+  }
+
+  .page-hero-title {
+    font-size: clamp(1.55rem, 7vw, 2.1rem);
+  }
+
+  .brand-name { font-size: 0.95rem; }
+  .brand-tag  { font-size: 0.58rem; }
+  .brand-emblem { width: 38px; height: 38px; }
+
+  .hero {
+    padding-bottom: 48px;
+  }
+
   .hero-badge {
-    font-size: 0.74rem;
+    font-size: 0.73rem;
+    padding: 8px 14px 8px 8px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.65rem, 7.5vw, 2.4rem);
+    margin-bottom: 16px;
+  }
+
+  .hero-desc {
+    font-size: 0.94rem;
+    margin-bottom: 28px;
   }
 
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    gap: 12px;
+    margin-bottom: 32px;
   }
 
   .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .hero-trust {
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-trust-item {
     width: 100%;
   }
 
   .hero-stats {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
+    margin-top: 20px;
   }
 
   .stat-box {
-    padding: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .stat-value {
+    justify-content: flex-start;
   }
 
   .stat-number {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  .stat-suffix {
+    font-size: 1.1rem;
+  }
+
+  .stat-label {
+    margin-top: 0;
   }
 
   .hero-carousel {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 4;
   }
 
+  .section { padding: 48px 0; }
+  .section--tight { padding: 36px 0; }
+
+  .section-head {
+    margin-bottom: 32px;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .feature-card {
+    padding: 24px 20px;
+  }
+
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .service-card {
+    padding: 28px 22px;
+  }
 
   .stats-strip {
     grid-template-columns: 1fr 1fr;
-    gap: 26px 14px;
+    gap: 22px 12px;
+    padding: 32px 16px;
+  }
+
+  .stat-number {
+    font-size: clamp(1.7rem, 5.5vw, 2.4rem);
+  }
+
+  .split-visual-frame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .split-badge {
+    right: 8px;
+    bottom: -16px;
+    min-width: 100px;
+    padding: 12px 14px;
+  }
+
+  .split-badge .num {
+    font-size: 1.5rem;
+  }
+
+  .split-badge .label {
+    font-size: 0.7rem;
   }
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 130px;
+    gap: 10px;
+  }
+
+  .testimonial-card {
+    padding: 24px 20px;
+  }
+
+  .location-info {
+    padding: 28px 20px;
+    gap: 18px;
+  }
+
+  .location-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .location-map {
+    min-height: 240px;
+  }
+
+  .location-map iframe {
+    min-height: 240px;
+  }
+
+  .cta-banner {
+    padding: 36px 20px;
+  }
+
+  .cta-banner-text h2 {
+    font-size: clamp(1.25rem, 5vw, 1.7rem);
+  }
+
+  .faq-question {
+    padding: 18px 20px;
+    font-size: 0.94rem;
+  }
+
+  .faq-answer-inner {
+    padding: 0 20px 20px;
   }
 
   .form-card {
@@ -418,10 +861,338 @@
   }
 
   .booking-info-card {
-    padding: 32px 24px;
+    padding: 28px 20px;
+  }
+
+  .specialty-banner {
+    padding: 28px 20px;
+    min-height: auto;
+  }
+
+  .specialty-banner h2 {
+    font-size: clamp(1.2rem, 5.5vw, 1.7rem);
+  }
+
+  .specialty-banner-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tag-pill {
+    font-size: 0.8rem;
+    padding: 7px 13px;
+  }
+
+  .specialty-side-card {
+    padding: 22px 18px;
+  }
+
+  .doctor-photo {
+    min-height: 220px;
+  }
+
+  .doctor-info {
+    padding: 28px 20px;
+  }
+
+  .doctor-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .site-footer {
+    padding-top: 60px;
+  }
+
+  .footer-top {
+    row-gap: 32px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
   }
 
   .page-hero {
-    padding: calc(var(--header-height) + 46px) 0 60px;
+    padding: calc(var(--header-height) + 28px) 0 48px;
+  }
+
+  .page-hero--about,
+  .page-hero--contact {
+    padding: calc(var(--header-height) + 32px) 0 52px;
+  }
+
+  .page-hero-desc {
+    font-size: 0.97rem;
+  }
+
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .timeline-item {
+    padding-bottom: 36px;
+  }
+
+  .timeline-dot {
+    left: -24px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .back-to-top {
+    width: 42px;
+    height: 42px;
+    bottom: 18px;
+    right: 16px;
+  }
+
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    bottom: 18px;
+    left: 16px;
   }
 }
+
+/* ==========================================================================
+   Small Mobile (max-width: 400px)
+   ========================================================================== */
+@media (max-width: 400px) {
+  .container {
+    padding-inline: 14px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 8vw, 1.9rem);
+  }
+
+  .hero-carousel {
+    aspect-ratio: 1 / 1;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-item {
+    padding: 8px 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 110px;
+  }
+
+  .btn-lg {
+    padding: 14px 22px;
+    font-size: 0.97rem;
+  }
+
+  .cta-banner {
+    padding: 28px 16px;
+  }
+
+  .form-card {
+    padding: 22px 14px;
+  }
+
+  .booking-info-card {
+    padding: 24px 16px;
+  }
+
+  .doctor-info {
+    padding: 24px 16px;
+  }
+
+  .specialty-banner {
+    padding: 24px 16px;
+  }
+}
+
+/* ==========================================================================
+   Touch device improvements
+   ========================================================================== */
+@media (pointer: coarse) {
+  .nav-link {
+    min-height: 48px;
+  }
+
+  .nav-toggle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .faq-question {
+    min-height: 56px;
+  }
+
+  .btn-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 119, 182, 0.28);
+  }
+
+  .btn-outline:active {
+    background: var(--color-primary);
+    color: #fff;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .whatsapp-float::before {
+    animation: none;
+  }
+
+  .carousel-slide {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+@media print {
+  .site-header,
+  .nav-toggle,
+  .whatsapp-float,
+  .back-to-top,
+  #preloader,
+  .hero-float-card {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+  }
+
+  .hero {
+    padding-top: 20px;
+    min-height: auto;
+    background: none;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .section { padding: 24pt 0; }
+}
+
+/* ==========================================================================
+   BUG FIXES — Targeted corrections for specific visible issues
+   ========================================================================== */
+
+/* ---- Fix 1: Button SVG icon sizing ----
+   SVGs inside buttons must have an explicit size so they don't
+   stretch when the button becomes full-width on mobile.
+   ------------------------------------------------------------ */
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-lg svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.btn-sm svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ---- Fix 2: Hide the inline nav-cta "Book an Appointment" inside the mobile drawer ----
+   .nav-cta is inside .nav-menu so it renders inside the drawer at ≤992px.
+   We already show it in the header bar area AND have .mobile-menu-actions
+   with larger buttons at the bottom of the drawer — so hide the small one.
+   ------------------------------------------------------------ */
+@media (max-width: 992px) {
+  .nav-menu .nav-cta {
+    display: none;
+  }
+}
+
+/* ---- Fix 3: Override inline-style 3-col grids to stack on mobile ----
+   Several pages use style="grid-template-columns: repeat(3, 1fr);"
+   inline which beats regular CSS selectors. Use !important to override.
+   Applies to: contact quick-cards, about mission/vision cards.
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .features-grid[style] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 992px) {
+  /* On tablet let 3-col inline grids show as 2-col */
+  .features-grid[style] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ---- Fix 4: Hero actions on mobile — ghost button needs border color ----
+   .btn-ghost has white border + white text which works on the dark hero
+   background but ensure it's still legible when stacked full-width.
+   ------------------------------------------------------------ */
+@media (max-width: 576px) {
+  .hero-actions .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+
+  /* Ensure hero-actions buttons wrap cleanly when stacked */
+  .hero-actions {
+    align-items: stretch;
+  }
+}
+
+/* ---- Fix 5: Hero trust items — allow wrapping on mid-size mobile ---- */
+@media (max-width: 640px) {
+  .hero-trust {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .hero-trust-item {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-trust {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+}
+
+/* ---- Drawer header: hide on desktop (min-width 993px) ---- */
+@media (min-width: 993px) {
+  .drawer-header {
+    display: none;
+  }
+
+  .drawer-close {
+    display: none;
+  }
+}
+
+

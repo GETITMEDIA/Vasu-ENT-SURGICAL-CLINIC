@@ -41,6 +41,13 @@
     });
   }
 
+  /* Close button inside the drawer */
+  const drawerClose = document.getElementById("drawer-close");
+  if (drawerClose) {
+    drawerClose.addEventListener("click", closeMobileMenu);
+  }
+
+
   /* Close mobile menu on outside click / escape */
   document.addEventListener("click", (e) => {
     if (!navMenu || !navToggle) return;
