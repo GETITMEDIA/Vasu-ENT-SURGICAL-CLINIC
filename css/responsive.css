@@ -1,0 +1,433 @@
+/* ==========================================================================
+   VASU ENT SURGICAL CLINIC — Responsive rules
+   Breakpoints: 1200 / 992 / 768 / 576
+   ========================================================================== */
+
+/* ----- Laptop / small desktop ----- */
+@media (max-width: 1200px) {
+  .container {
+    padding-inline: 20px;
+  }
+
+  .hero-grid {
+    gap: 30px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 34px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 44px;
+  }
+}
+
+/* ----- Tablet ----- */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 76px;
+  }
+
+  .site-header {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-bottom: 1px solid rgba(0, 119, 182, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-sm);
+    height: var(--header-height);
+  }
+
+  .site-header .brand-name {
+    color: var(--color-primary-dark);
+  }
+
+  .site-header .brand-tag {
+    color: var(--color-secondary);
+  }
+
+  .site-header .nav-link {
+    color: var(--color-text);
+  }
+
+  .site-header .nav-link:hover,
+  .site-header .nav-link.is-active {
+    color: var(--color-primary);
+    background: rgba(0, 119, 182, 0.08);
+  }
+
+  .site-header .nav-link .chevron {
+    color: var(--color-text);
+  }
+
+  .section {
+    padding: 76px 0;
+  }
+
+  .nav-phone {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(340px, 84vw);
+    background: #fff;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 110px 28px 40px;
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.15);
+    transform: translateX(100%);
+    transition: transform var(--transition);
+    overflow-y: auto;
+    gap: 4px;
+    display: flex;
+  }
+
+  .nav-menu:not(.is-open) {
+    transform: translateX(100%);
+  }
+
+  .nav-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px 6px;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+  }
+
+  .mega-menu {
+    position: static;
+    transform: none;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 6px 0 6px 16px;
+    display: none;
+    grid-template-columns: 1fr;
+    opacity: 1;
+    visibility: visible;
+    gap: 18px;
+  }
+
+  .nav-item.has-mega.is-open .mega-menu {
+    display: grid;
+    transform: none;
+  }
+
+  .mobile-menu-actions {
+    margin-top: 20px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-menu .mobile-menu-actions {
+    display: flex;
+  }
+
+  .hero {
+    padding-top: calc(var(--header-height) + 30px);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    max-width: 460px;
+    margin-inline: auto;
+    order: -1;
+  }
+
+  .carousel-ctrl {
+    opacity: 1;
+    visibility: visible;
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-desc {
+    margin-inline: auto;
+  }
+
+  .hero-actions,
+  .hero-trust {
+    justify-content: center;
+  }
+
+  .split-section {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+
+  .split-visual {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .location-card {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 160px;
+  }
+
+  .testimonial-card {
+    flex: 0 0 calc(50% - 13px);
+  }
+
+  .doctor-card {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-photo {
+    min-height: 280px;
+  }
+
+  .specialty-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 48px 32px;
+  }
+
+  .cta-banner-text p {
+    max-width: none;
+  }
+
+  .form-card {
+    padding: 34px 26px;
+  }
+}
+
+/* ----- Mobile ----- */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  .section--tight {
+    padding: 46px 0;
+  }
+
+
+  .brand-name {
+    font-size: 1rem;
+  }
+
+  .nav-menu {
+    width: 100vw;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-bottom: 70px;
+  }
+
+  .hero-float-card {
+    display: none;
+  }
+
+  .hero-trust {
+    gap: 18px;
+  }
+
+  .features-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 150px;
+  }
+
+  .gallery-item.span-2 {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .testimonial-card {
+    flex: 0 0 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .cta-banner-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-banner-actions .btn {
+    width: 100%;
+  }
+
+  .specialty-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    top: calc(var(--header-height) + 6px);
+    border-radius: var(--radius-md);
+  }
+
+  .specialty-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .specialty-tab {
+    flex-shrink: 0;
+  }
+
+  .specialty-banner {
+    padding: 34px 26px;
+  }
+
+  .back-to-top {
+    width: 46px;
+    height: 46px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    left: 20px;
+  }
+}
+
+/* ----- Small mobile ----- */
+@media (max-width: 576px) {
+  .container {
+    padding-inline: 16px;
+  }
+
+  .hero-badge {
+    font-size: 0.74rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .stat-box {
+    padding: 12px;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  .hero-carousel {
+    aspect-ratio: 1 / 1;
+  }
+
+  .carousel-caption {
+    bottom: 16px;
+    left: 16px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 14px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 130px;
+  }
+
+  .form-card {
+    padding: 26px 18px;
+  }
+
+  .booking-info-card {
+    padding: 32px 24px;
+  }
+
+  .page-hero {
+    padding: calc(var(--header-height) + 46px) 0 60px;
+  }
+}

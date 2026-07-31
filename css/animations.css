@@ -1,0 +1,158 @@
+/* ==========================================================================
+   VASU ENT SURGICAL CLINIC — Animations
+   Keyframes + scroll-reveal utility classes
+   ========================================================================== */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    top: -100%;
+  }
+  50% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes ripple-anim {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ==========================================================================
+   Scroll reveal — toggled by IntersectionObserver in app.js
+   ========================================================================== */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+[data-reveal="up"] {
+  transform: translateY(40px);
+}
+[data-reveal="down"] {
+  transform: translateY(-40px);
+}
+[data-reveal="left"] {
+  transform: translateX(-50px);
+}
+[data-reveal="right"] {
+  transform: translateX(50px);
+}
+[data-reveal="zoom"] {
+  transform: scale(0.9);
+}
+[data-reveal="fade"] {
+  transform: none;
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Stagger children of a group */
+[data-reveal-group] > [data-reveal] {
+  transition-delay: calc(var(--stagger-index, 0) * 90ms);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-float-card,
+  .loader-emblem,
+  .whatsapp-float::before,
+  .hero-scroll-line::after {
+    animation: none !important;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Page transition fade-in on load */
+body {
+  animation: fade-in 0.5s ease;
+}
+
+/* Section entrance helper for hero text (auto-run, no observer needed) */
+.hero-badge,
+.hero-title,
+.hero-desc,
+.hero-actions,
+.hero-trust {
+  animation: fade-in 1s ease both;
+}
+.hero-title {
+  animation-delay: 0.1s;
+}
+.hero-desc {
+  animation-delay: 0.2s;
+}
+.hero-actions {
+  animation-delay: 0.3s;
+}
+.hero-trust {
+  animation-delay: 0.4s;
+}
