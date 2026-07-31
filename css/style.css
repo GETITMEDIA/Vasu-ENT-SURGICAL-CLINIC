@@ -621,26 +621,37 @@ textarea:focus-visible {
 
 /* Mega menu */
 .mega-menu {
-  position: absolute;
-  top: calc(100% + 14px);
+  position: fixed;
+  top: calc(var(--header-height) + 14px);
   left: 50%;
-  transform: translateX(-50%) translateY(16px);
+  transform: translateX(-50%) translateY(12px);
   width: min(880px, 92vw);
-  background: rgba(255, 255, 255, 0.96);
-  border-radius: var(--radius-md);
-  box-shadow: 0 24px 64px rgba(2, 62, 92, 0.14);
-  border: 1px solid rgba(0, 119, 182, 0.12);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 30px;
+  max-height: calc(100vh - var(--header-height) - 40px);
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(2, 62, 92, 0.08), 0 30px 70px rgba(2, 62, 92, 0.16);
+  border: 1px solid var(--color-border);
+  padding: 34px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 26px;
+  gap: 30px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
   z-index: 200;
+}
+
+.mega-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 34px;
+  right: 34px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--gradient-primary);
 }
 
 .nav-item.has-mega:hover .mega-menu,
@@ -1353,6 +1364,156 @@ textarea:focus-visible {
 
 .hero-contact-content {
   max-width: 800px;
+}
+
+/* ==========================================================================
+   Specialties page hero — orbit illustration (built from CSS/SVG, no raster asset)
+   ========================================================================== */
+.page-hero--specialties {
+  padding: calc(var(--header-height) + 70px) 0 100px;
+}
+
+.specialties-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.specialties-hero-text .page-hero-title,
+.specialties-hero-text .page-hero-desc {
+  max-width: 100%;
+}
+
+.specialties-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.specialty-orbit {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.22);
+}
+
+.orbit-ring.ring-inner {
+  inset: 15%;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(2, 62, 92, 0.35);
+  animation: orbit-pulse 3.2s ease-in-out infinite;
+}
+
+.orbit-center img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+}
+
+@keyframes orbit-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(2, 62, 92, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.08), 0 20px 50px rgba(2, 62, 92, 0.35);
+  }
+}
+
+.orbit-chip {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-primary-dark);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 9px 16px 9px 9px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 14px 30px rgba(2, 62, 92, 0.25);
+  white-space: nowrap;
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.orbit-chip-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.orbit-chip-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.chip-1 {
+  top: 4%;
+  left: 50%;
+  animation-delay: 0s;
+}
+.chip-2 {
+  top: 27%;
+  left: 89%;
+  animation-delay: 0.5s;
+}
+.chip-3 {
+  top: 73%;
+  left: 89%;
+  animation-delay: 1s;
+}
+.chip-4 {
+  top: 96%;
+  left: 50%;
+  animation-delay: 1.5s;
+}
+.chip-5 {
+  top: 73%;
+  left: 11%;
+  animation-delay: 2s;
+}
+.chip-6 {
+  top: 27%;
+  left: 11%;
+  animation-delay: 2.5s;
 }
 
 /* ==========================================================================

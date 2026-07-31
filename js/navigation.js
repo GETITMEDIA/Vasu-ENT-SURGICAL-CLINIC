@@ -82,6 +82,47 @@
     });
   });
 
+  /* Mega menu: gap-tolerant hover on desktop.
+     The dropdown is position:fixed and sits a few pixels below the
+     trigger, so a plain CSS :hover chain breaks while the cursor
+     crosses that gap. Track hover on both the trigger and the menu
+     itself, and close after a short delay so brief gap-crossing or
+     accidental mouse-outs don't collapse it. */
+  const HOVER_CLOSE_DELAY = 250;
+
+  function isDesktopNav() {
+    return window.matchMedia("(min-width: 993px)").matches;
+  }
+
+  megaItems.forEach((item) => {
+    const megaMenu = item.querySelector(".mega-menu");
+    let closeTimer = null;
+
+    function openNow() {
+      if (!isDesktopNav()) return;
+      clearTimeout(closeTimer);
+      megaItems.forEach((other) => {
+        if (other !== item) other.classList.remove("is-open");
+      });
+      item.classList.add("is-open");
+    }
+
+    function closeSoon() {
+      if (!isDesktopNav()) return;
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => {
+        item.classList.remove("is-open");
+      }, HOVER_CLOSE_DELAY);
+    }
+
+    item.addEventListener("mouseenter", openNow);
+    item.addEventListener("mouseleave", closeSoon);
+    if (megaMenu) {
+      megaMenu.addEventListener("mouseenter", openNow);
+      megaMenu.addEventListener("mouseleave", closeSoon);
+    }
+  });
+
   /* Close mobile nav when a real link is clicked */
   document.querySelectorAll(".nav-menu a:not(.nav-link)").forEach((link) => {
     link.addEventListener("click", closeMobileMenu);
