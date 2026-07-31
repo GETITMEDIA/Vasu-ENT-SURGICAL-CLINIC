@@ -125,10 +125,10 @@ body {
     border-radius: 0;
     background: rgba(255, 255, 255, 0.97);
     border: none;
-    border-bottom: 1px solid rgba(0, 119, 182, 0.09);
+    border-bottom: 1px solid rgba(var(--ear-rgb), 0.09);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 2px 16px rgba(2, 62, 92, 0.07);
+    box-shadow: 0 2px 16px rgba(var(--ear-rgb), 0.07);
     height: var(--header-height);
   }
 
@@ -141,8 +141,8 @@ body {
 
   .site-header .nav-link:hover,
   .site-header .nav-link.is-active {
-    color: var(--color-primary);
-    background: rgba(0, 119, 182, 0.08);
+    color: var(--ear-color);
+    background: rgba(var(--ear-rgb), 0.08);
   }
 
   .site-header .nav-link .chevron {
@@ -210,7 +210,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(0, 119, 182, 0.07);
+    background: rgba(var(--nose-rgb), 0.07);
     color: var(--color-primary-dark);
     display: flex;
     align-items: center;
@@ -1049,7 +1049,7 @@ body {
 
   .btn-primary:active {
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0, 119, 182, 0.28);
+    box-shadow: 0 8px 20px rgba(var(--throat-rgb), 0.28);
   }
 
   .btn-outline:active {

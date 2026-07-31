@@ -4,33 +4,54 @@
    ========================================================================== */
 
 :root {
-  /* Brand colors */
-  --color-primary: #0077b6;
-  --color-primary-dark: #023e5c;
-  --color-secondary: #0096c7;
-  --color-accent: #00b4d8;
+  /* ==========================================================================
+     Brand colors — ENT anatomy palette
+     Throat → primary CTA buttons, highlights, alerts, important actions
+     Nose   → secondary buttons, hover effects, feature sections, icons, accents
+     Ear    → navigation bar, headings, footer, primary text accents, brand sections
+     ========================================================================== */
+  --throat-color: #f87142;
+  --nose-color: #24a9ae;
+  --ear-color: #006d9a;
+
+  /* RGB triplets for use inside rgba() */
+  --throat-rgb: 248, 113, 66;
+  --nose-rgb: 36, 169, 174;
+  --ear-rgb: 0, 109, 154;
+
+  /* Semantic aliases — mapped onto the brand palette above */
+  --color-primary: var(--nose-color);
+  --color-primary-dark: var(--ear-color);
+  --color-secondary: var(--nose-color);
+  --color-accent: var(--nose-color);
   --color-light: #f8fbfd;
   --color-white: #ffffff;
   --color-text: #1f2937;
   --color-text-muted: #5b6b7c;
-  --color-border: #e3edf3;
+  --color-border: #dfeef4;
   --color-success: #1a9e6f;
   --color-error: #d64545;
 
-  --gradient-primary: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
-  --gradient-deep: linear-gradient(135deg, #023e5c 0%, #0077b6 60%, #00b4d8 100%);
-  --gradient-soft: linear-gradient(135deg, rgba(0, 119, 182, 0.08) 0%, rgba(0, 180, 216, 0.08) 100%);
-  --gradient-text: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+  /* Primary CTA gradient (throat) — buttons only */
+  --gradient-primary: linear-gradient(135deg, var(--throat-color) 0%, #ff9d6b 100%);
+  /* Icon-badge / accent gradient (nose) */
+  --gradient-accent: linear-gradient(135deg, var(--nose-color) 0%, #5cc8cc 100%);
+  /* Deep brand-section gradient (ear) — hero, footer, dark panels */
+  --gradient-deep: linear-gradient(135deg, #013a52 0%, var(--ear-color) 60%, #1c94c4 100%);
+  /* Soft tinted background (nose) — icon badges, tag pills, card fills */
+  --gradient-soft: linear-gradient(135deg, rgba(var(--nose-rgb), 0.08) 0%, rgba(var(--nose-rgb), 0.14) 100%);
+  /* Heading accent text (nose) — bright enough to stay legible on both light sections and dark hero panels */
+  --gradient-text: linear-gradient(135deg, var(--nose-color) 0%, #5cc8cc 100%);
 
   /* Typography */
   --font-heading: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(2, 62, 92, 0.06);
-  --shadow-md: 0 10px 30px rgba(2, 62, 92, 0.1);
-  --shadow-lg: 0 20px 60px rgba(2, 62, 92, 0.14);
-  --shadow-glow: 0 0 0 6px rgba(0, 180, 216, 0.12);
+  --shadow-sm: 0 2px 8px rgba(var(--ear-rgb), 0.06);
+  --shadow-md: 0 10px 30px rgba(var(--ear-rgb), 0.1);
+  --shadow-lg: 0 20px 60px rgba(var(--ear-rgb), 0.14);
+  --shadow-glow: 0 0 0 6px rgba(var(--nose-rgb), 0.12);
 
   /* Radii */
   --radius-sm: 10px;
@@ -129,7 +150,7 @@ textarea:focus-visible {
   position: absolute;
   left: -999px;
   top: 0;
-  background: var(--color-primary);
+  background: var(--ear-color);
   color: #fff;
   padding: 12px 20px;
   z-index: 10000;
@@ -259,7 +280,7 @@ textarea:focus-visible {
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(0, 119, 182, 0.32);
+  box-shadow: 0 16px 36px rgba(var(--throat-rgb), 0.32);
 }
 
 .btn-outline {
@@ -323,7 +344,7 @@ textarea:focus-visible {
 }
 
 .btn-outline .ripple {
-  background: rgba(0, 119, 182, 0.25);
+  background: rgba(var(--nose-rgb), 0.25);
 }
 
 /* ==========================================================================
@@ -402,7 +423,7 @@ textarea:focus-visible {
     transition: color 0.35s ease;
   }
   .site-header .brand-tag {
-    color: #90e0ef;
+    color: var(--nose-color);
     transition: color 0.35s ease;
   }
   .site-header .nav-link {
@@ -426,7 +447,7 @@ textarea:focus-visible {
     transition: color 0.35s ease;
   }
   .site-header .nav-phone svg {
-    color: #90e0ef;
+    color: var(--nose-color);
     transition: color 0.35s ease;
   }
 
@@ -434,8 +455,8 @@ textarea:focus-visible {
     top: 10px;
     height: 72px;
     background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(0, 119, 182, 0.1);
-    box-shadow: 0 12px 40px rgba(2, 62, 92, 0.08);
+    border: 1px solid rgba(var(--ear-rgb), 0.1);
+    box-shadow: 0 12px 40px rgba(var(--ear-rgb), 0.08);
   }
   .site-header.is-scrolled .brand-name {
     color: var(--color-primary-dark);
@@ -451,11 +472,11 @@ textarea:focus-visible {
   }
   .site-header.is-scrolled .nav-link:hover,
   .site-header.is-scrolled .nav-link.is-active {
-    color: var(--color-primary);
-    background: rgba(0, 119, 182, 0.08);
+    color: var(--ear-color);
+    background: rgba(var(--ear-rgb), 0.08);
   }
   .site-header.is-scrolled .nav-link:hover .chevron {
-    color: var(--color-primary);
+    color: var(--ear-color);
   }
   .site-header.is-scrolled .nav-phone {
     color: var(--color-primary-dark);
@@ -540,8 +561,8 @@ textarea:focus-visible {
 
 .nav-link:hover,
 .nav-link.is-active {
-  color: var(--color-primary);
-  background: rgba(0, 119, 182, 0.08);
+  color: var(--ear-color);
+  background: rgba(var(--ear-rgb), 0.08);
 }
 
 .nav-link .chevron {
@@ -630,7 +651,7 @@ textarea:focus-visible {
   overflow-y: auto;
   background: #ffffff;
   border-radius: var(--radius-lg);
-  box-shadow: 0 10px 30px rgba(2, 62, 92, 0.08), 0 30px 70px rgba(2, 62, 92, 0.16);
+  box-shadow: 0 10px 30px rgba(var(--ear-rgb), 0.08), 0 30px 70px rgba(var(--ear-rgb), 0.16);
   border: 1px solid var(--color-border);
   padding: 34px;
   display: grid;
@@ -651,7 +672,7 @@ textarea:focus-visible {
   right: 34px;
   height: 3px;
   border-radius: 0 0 3px 3px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
 }
 
 .nav-item.has-mega:hover .mega-menu,
@@ -694,9 +715,9 @@ textarea:focus-visible {
 
 .mega-col:hover .mega-col-icon {
   transform: translateY(-2px) scale(1.08);
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
-  box-shadow: 0 6px 16px rgba(0, 119, 182, 0.22);
+  box-shadow: 0 6px 16px rgba(var(--nose-rgb), 0.22);
 }
 
 .mega-col ul {
@@ -764,7 +785,7 @@ textarea:focus-visible {
 .hero::before {
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, rgba(0, 180, 216, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--nose-rgb), 0.4), transparent 70%);
   top: -120px;
   right: -140px;
   animation: float-glow-1 14s ease-in-out infinite;
@@ -851,7 +872,7 @@ textarea:focus-visible {
 }
 
 .hero-title .accent {
-  background: linear-gradient(135deg, #90e0ef, #00b4d8);
+  background: var(--gradient-text);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -916,7 +937,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #90e0ef;
+  color: var(--nose-color);
   flex-shrink: 0;
   transition: transform var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
 }
@@ -926,7 +947,7 @@ textarea:focus-visible {
 }
 
 .hero-trust-item:hover .hero-trust-icon {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   border-color: transparent;
   transform: scale(1.05);
@@ -962,7 +983,7 @@ textarea:focus-visible {
   height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 30px 70px rgba(2, 62, 92, 0.35);
+  box-shadow: 0 30px 70px rgba(var(--ear-rgb), 0.35);
   border: 5px solid rgba(255, 255, 255, 0.16);
 }
 
@@ -1029,7 +1050,7 @@ textarea:focus-visible {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 30px 70px rgba(2, 62, 92, 0.35);
+  box-shadow: 0 30px 70px rgba(var(--ear-rgb), 0.35);
   aspect-ratio: 4 / 5;
   border: 5px solid rgba(255, 255, 255, 0.16);
 }
@@ -1071,7 +1092,7 @@ textarea:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(2, 62, 92, 0.55), transparent 45%);
+  background: linear-gradient(to top, rgba(var(--ear-rgb), 0.55), transparent 45%);
   z-index: 2;
   pointer-events: none;
 }
@@ -1123,7 +1144,7 @@ textarea:focus-visible {
   font-family: var(--font-heading);
   font-size: 0.76rem;
   font-weight: 700;
-  color: #90e0ef;
+  color: var(--nose-color);
 }
 
 .stat-label {
@@ -1166,10 +1187,10 @@ textarea:focus-visible {
 }
 
 .carousel-ctrl:hover {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 6px 16px rgba(0, 119, 182, 0.3);
+  box-shadow: 0 6px 16px rgba(var(--nose-rgb), 0.3);
 }
 
 .ctrl-prev {
@@ -1196,7 +1217,7 @@ textarea:focus-visible {
   -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius-md);
   padding: 16px 20px;
-  box-shadow: 0 20px 40px rgba(2, 62, 92, 0.12);
+  box-shadow: 0 20px 40px rgba(var(--ear-rgb), 0.12);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -1206,7 +1227,7 @@ textarea:focus-visible {
 
 .hero-float-card:hover {
   transform: translateY(-6px) scale(1.03) !important;
-  box-shadow: 0 30px 50px rgba(2, 62, 92, 0.18);
+  box-shadow: 0 30px 50px rgba(var(--ear-rgb), 0.18);
   animation-play-state: paused;
 }
 
@@ -1226,7 +1247,7 @@ textarea:focus-visible {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1278,7 +1299,7 @@ textarea:focus-visible {
   top: -100%;
   width: 100%;
   height: 100%;
-  background: #90e0ef;
+  background: var(--nose-color);
   animation: scroll-down 1.8s ease-in-out infinite;
 }
 
@@ -1300,7 +1321,7 @@ textarea:focus-visible {
   width: 480px;
   height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 180, 216, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--nose-rgb), 0.35), transparent 70%);
   top: -160px;
   right: -100px;
   z-index: -1;
@@ -1320,7 +1341,7 @@ textarea:focus-visible {
   transition: color var(--transition);
 }
 .breadcrumbs a:hover {
-  color: #90e0ef;
+  color: var(--nose-color);
 }
 
 .page-hero-title {
@@ -1337,7 +1358,7 @@ textarea:focus-visible {
 }
 
 .page-hero--about {
-  background: linear-gradient(to right, rgba(2, 62, 92, 0.95), rgba(2, 62, 92, 0.6)), url('../assets/images/about_hero_bg.png');
+  background: linear-gradient(to right, rgba(var(--ear-rgb), 0.95), rgba(var(--ear-rgb), 0.6)), url('../assets/images/about_hero_bg.png');
   background-size: cover;
   background-position: center;
   padding: calc(var(--header-height) + 90px) 0 110px;
@@ -1352,7 +1373,7 @@ textarea:focus-visible {
 }
 
 .page-hero--contact {
-  background: linear-gradient(to right, rgba(2, 62, 92, 0.95), rgba(2, 62, 92, 0.6)), url('../assets/images/contact_hero_bg.png');
+  background: linear-gradient(to right, rgba(var(--ear-rgb), 0.95), rgba(var(--ear-rgb), 0.6)), url('../assets/images/contact_hero_bg.png');
   background-size: cover;
   background-position: center;
   padding: calc(var(--header-height) + 90px) 0 110px;
@@ -1431,7 +1452,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(2, 62, 92, 0.35);
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(var(--ear-rgb), 0.35);
   animation: orbit-pulse 3.2s ease-in-out infinite;
 }
 
@@ -1444,10 +1465,10 @@ textarea:focus-visible {
 @keyframes orbit-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(2, 62, 92, 0.35);
+    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(var(--ear-rgb), 0.35);
   }
   50% {
-    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.08), 0 20px 50px rgba(2, 62, 92, 0.35);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.08), 0 20px 50px rgba(var(--ear-rgb), 0.35);
   }
 }
 
@@ -1464,7 +1485,7 @@ textarea:focus-visible {
   font-size: 0.82rem;
   padding: 9px 16px 9px 9px;
   border-radius: var(--radius-full);
-  box-shadow: 0 14px 30px rgba(2, 62, 92, 0.25);
+  box-shadow: 0 14px 30px rgba(var(--ear-rgb), 0.25);
   white-space: nowrap;
   animation: float-y 5s ease-in-out infinite;
 }
@@ -1473,7 +1494,7 @@ textarea:focus-visible {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -1549,7 +1570,7 @@ textarea:focus-visible {
   width: 58px;
   height: 58px;
   border-radius: 16px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1592,7 +1613,7 @@ textarea:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   opacity: 0;
   transition: opacity var(--transition);
   z-index: 0;
@@ -1842,8 +1863,8 @@ textarea:focus-visible {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--gradient-primary);
-  box-shadow: 0 0 0 5px rgba(0, 180, 216, 0.18);
+  background: var(--gradient-accent);
+  box-shadow: 0 0 0 5px rgba(var(--nose-rgb), 0.18);
 }
 
 .timeline-year {
@@ -1913,7 +1934,7 @@ textarea:focus-visible {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -1972,7 +1993,7 @@ textarea:focus-visible {
   transition: background var(--transition), color var(--transition);
 }
 .testimonial-arrow:hover {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
 }
 .testimonial-arrow svg {
@@ -2016,7 +2037,7 @@ textarea:focus-visible {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(2, 62, 92, 0.75), transparent 60%);
+  background: linear-gradient(to top, rgba(var(--ear-rgb), 0.75), transparent 60%);
   display: flex;
   align-items: flex-end;
   padding: 18px;
@@ -2080,7 +2101,7 @@ textarea:focus-visible {
    CTA banner
    ========================================================================== */
 .cta-banner {
-  background: linear-gradient(to right, rgba(2, 62, 92, 0.8), rgba(0, 180, 216, 0.3)), url('../assets/images/cta_medical_bg.png');
+  background: linear-gradient(to right, rgba(var(--ear-rgb), 0.8), rgba(var(--nose-rgb), 0.3)), url('../assets/images/cta_medical_bg.png');
   background-size: cover;
   background-position: center;
   border-radius: var(--radius-lg);
@@ -2100,7 +2121,7 @@ textarea:focus-visible {
   width: 420px;
   height: 420px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 180, 216, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--nose-rgb), 0.35), transparent 70%);
   top: -160px;
   right: -80px;
   z-index: -1;
@@ -2180,7 +2201,7 @@ textarea:focus-visible {
 
 .faq-item.is-open .faq-icon {
   transform: rotate(45deg);
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
 }
 
@@ -2237,7 +2258,7 @@ textarea:focus-visible {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #90e0ef;
+  color: var(--nose-color);
 }
 .location-detail-icon svg {
   width: 20px;
@@ -2309,7 +2330,7 @@ textarea:focus-visible {
   transition: background var(--transition), transform var(--transition);
 }
 .footer-socials a:hover {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   transform: translateY(-4px);
   border-color: transparent;
 }
@@ -2335,7 +2356,7 @@ textarea:focus-visible {
   transition: color var(--transition), padding-left var(--transition);
 }
 .footer-col a:hover {
-  color: #90e0ef;
+  color: var(--nose-color);
   padding-left: 4px;
 }
 
@@ -2350,13 +2371,13 @@ textarea:focus-visible {
   text-decoration: none;
 }
 .footer-contact a:hover {
-  color: #90e0ef;
+  color: var(--nose-color);
   padding-left: 0;
 }
 .footer-contact svg {
   width: 18px;
   height: 18px;
-  color: #90e0ef;
+  color: var(--nose-color);
   flex-shrink: 0;
   margin-top: 3px;
 }
@@ -2379,7 +2400,7 @@ textarea:focus-visible {
 }
 
 .footer-bottom a:hover {
-  color: #90e0ef;
+  color: var(--nose-color);
 }
 
 /* ==========================================================================
@@ -2392,7 +2413,7 @@ textarea:focus-visible {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -2500,7 +2521,7 @@ textarea:focus-visible {
   outline: none;
   border-color: var(--color-accent);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.14);
+  box-shadow: 0 0 0 4px rgba(var(--nose-rgb), 0.14);
 }
 
 textarea.form-control {
@@ -2608,7 +2629,7 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #90e0ef;
+  color: var(--nose-color);
   flex-shrink: 0;
 }
 .booking-info-list .icon svg {
@@ -2684,9 +2705,9 @@ textarea.form-control {
 }
 
 .specialty-tab.is-active {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 119, 182, 0.28);
+  box-shadow: 0 8px 20px rgba(var(--nose-rgb), 0.28);
   transform: translateY(-1px);
 }
 
@@ -2722,7 +2743,7 @@ textarea.form-control {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(circle at 88% 15%, rgba(0, 180, 216, 0.4), transparent 60%);
+  background: radial-gradient(circle at 88% 15%, rgba(var(--nose-rgb), 0.4), transparent 60%);
 }
 
 .sp-hero-icon {
@@ -2755,7 +2776,7 @@ textarea.form-control {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #90e0ef;
+  color: var(--nose-color);
   margin-bottom: 10px;
 }
 .sp-eyebrow::before {
@@ -2763,7 +2784,7 @@ textarea.form-control {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #90e0ef;
+  background: var(--nose-color);
 }
 
 .sp-hero h2 {
@@ -2801,7 +2822,7 @@ textarea.form-control {
 .sp-stat svg {
   width: 15px;
   height: 15px;
-  color: #90e0ef;
+  color: var(--nose-color);
   flex-shrink: 0;
 }
 
@@ -2839,7 +2860,7 @@ textarea.form-control {
   content: "";
   width: 4px;
   height: 18px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   border-radius: 4px;
 }
 
@@ -2867,7 +2888,7 @@ textarea.form-control {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -2907,7 +2928,7 @@ textarea.form-control {
   width: 30px;
   height: 30px;
   border-radius: 9px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
@@ -2957,7 +2978,7 @@ textarea.form-control {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 180, 216, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--nose-rgb), 0.35), transparent 70%);
   top: -100px;
   right: -60px;
   z-index: -1;
@@ -3031,7 +3052,7 @@ textarea.form-control {
   width: 62px;
   height: 62px;
   border-radius: 18px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: #fff;
   display: flex;
   align-items: center;
