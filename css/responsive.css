@@ -99,8 +99,8 @@ body {
     gap: 48px;
   }
 
-  .specialty-content-grid {
-    gap: 36px;
+  .sp-grid {
+    gap: 24px;
   }
 
   .doctor-info {
@@ -412,9 +412,31 @@ body {
     justify-content: center;
   }
 
-  .specialty-content-grid {
+  .sp-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 24px;
+  }
+
+  .sp-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 38px 30px;
+  }
+
+  .sp-hero-icon {
+    margin-inline: auto;
+  }
+
+  .sp-hero p {
+    max-width: 100%;
+  }
+
+  .sp-quickstats {
+    justify-content: center;
+  }
+
+  .sp-advantage-grid {
+    grid-template-columns: 1fr;
   }
 
   .form-card {
@@ -606,12 +628,6 @@ body {
     flex-shrink: 0;
     padding: 9px 16px;
     font-size: 0.82rem;
-  }
-
-  .specialty-banner {
-    padding: 32px 24px;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .back-to-top {
@@ -864,18 +880,23 @@ body {
     padding: 28px 20px;
   }
 
-  .specialty-banner {
+  .sp-hero {
     padding: 28px 20px;
-    min-height: auto;
   }
 
-  .specialty-banner h2 {
+  .sp-hero h2 {
     font-size: clamp(1.2rem, 5.5vw, 1.7rem);
   }
 
-  .specialty-banner-icon {
-    width: 56px;
-    height: 56px;
+  .sp-hero-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+  }
+
+  .sp-hero-icon svg {
+    width: 32px;
+    height: 32px;
   }
 
   .tag-pill {
@@ -883,7 +904,7 @@ body {
     padding: 7px 13px;
   }
 
-  .specialty-side-card {
+  .sp-aside-card {
     padding: 22px 18px;
   }
 
@@ -1004,7 +1025,7 @@ body {
     padding: 24px 16px;
   }
 
-  .specialty-banner {
+  .sp-hero {
     padding: 24px 16px;
   }
 }
