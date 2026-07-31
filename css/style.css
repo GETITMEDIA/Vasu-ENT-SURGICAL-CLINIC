@@ -1329,6 +1329,21 @@ textarea:focus-visible {
   max-width: 800px;
 }
 
+.page-hero--contact {
+  background: linear-gradient(to right, rgba(2, 62, 92, 0.95), rgba(2, 62, 92, 0.6)), url('../assets/images/contact_hero_bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: calc(var(--header-height) + 90px) 0 110px;
+}
+
+.page-hero--contact::before {
+  display: none;
+}
+
+.hero-contact-content {
+  max-width: 800px;
+}
+
 /* ==========================================================================
    Cards
    ========================================================================== */
