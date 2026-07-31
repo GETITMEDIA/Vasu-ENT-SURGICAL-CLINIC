@@ -971,29 +971,6 @@ textarea:focus-visible {
   border-radius: 0;
 }
 
-.carousel-caption {
-  position: absolute;
-  bottom: 16px;
-  left: 20px;
-  background: rgba(2, 62, 92, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-  transition: transform 0.4s ease;
-}
-
-.carousel-slide.active:hover .carousel-caption {
-  transform: translateY(-4px);
-}
 
 .carousel-dots {
   position: absolute;
@@ -1097,6 +1074,14 @@ textarea:focus-visible {
   transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
+.stat-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+
 .stat-box:hover {
   transform: translateY(-4px);
   background: rgba(255, 255, 255, 0.14);
@@ -1179,19 +1164,7 @@ textarea:focus-visible {
   visibility: visible;
 }
 
-.carousel-caption {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.caption-icon {
-  font-size: 1.1rem;
-}
-
-.caption-text {
-  font-weight: 600;
-}
 
 .hero-float-card {
   position: absolute;
@@ -1339,6 +1312,21 @@ textarea:focus-visible {
   color: rgba(255, 255, 255, 0.82);
   max-width: 620px;
   font-size: 1.05rem;
+}
+
+.page-hero--about {
+  background: linear-gradient(to right, rgba(2, 62, 92, 0.95), rgba(2, 62, 92, 0.6)), url('../assets/images/about_hero_bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: calc(var(--header-height) + 90px) 0 110px;
+}
+
+.page-hero--about::before {
+  display: none;
+}
+
+.hero-about-content {
+  max-width: 800px;
 }
 
 /* ==========================================================================
@@ -1905,7 +1893,9 @@ textarea:focus-visible {
    CTA banner
    ========================================================================== */
 .cta-banner {
-  background: var(--gradient-deep);
+  background: linear-gradient(to right, rgba(2, 62, 92, 0.8), rgba(0, 180, 216, 0.3)), url('../assets/images/cta_medical_bg.png');
+  background-size: cover;
+  background-position: center;
   border-radius: var(--radius-lg);
   padding: 64px 56px;
   display: flex;
@@ -2163,10 +2153,18 @@ textarea:focus-visible {
 }
 
 .footer-contact li {
+  font-size: 0.9rem;
+}
+.footer-contact a {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 0.9rem;
+  color: inherit;
+  text-decoration: none;
+}
+.footer-contact a:hover {
+  color: #90e0ef;
+  padding-left: 0;
 }
 .footer-contact svg {
   width: 18px;
@@ -2688,8 +2686,6 @@ textarea.form-control {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  mix-blend-mode: luminosity;
-  opacity: 0.9;
 }
 
 .doctor-info {

@@ -402,12 +402,6 @@
     aspect-ratio: 1 / 1;
   }
 
-  .carousel-caption {
-    bottom: 16px;
-    left: 16px;
-    padding: 6px 12px;
-    font-size: 0.78rem;
-  }
 
   .stats-strip {
     grid-template-columns: 1fr 1fr;
