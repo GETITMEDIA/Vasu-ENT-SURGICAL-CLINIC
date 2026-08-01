@@ -1,158 +1,312 @@
-/* ==========================================================================
-   VASU ENT SURGICAL CLINIC — Animations
-   Keyframes + scroll-reveal utility classes
-   ========================================================================== */
+/* ============================================================
+   PREMIUM ANIMATIONS & MICRO-EFFECTS — Vasu ENT Surgical Clinic
+   ============================================================ */
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* ── Scroll Progress Bar ── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #006d9a, #24a9ae, #006d9a);
+  background-size: 200% auto;
+  animation: progress-gradient 3s linear infinite;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 0 2px 2px 0;
 }
 
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
+@keyframes progress-gradient {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
-@keyframes scroll-down {
-  0% {
-    top: -100%;
-  }
-  50% {
-    top: 0%;
-  }
-  100% {
-    top: 100%;
-  }
-}
-
-@keyframes ripple-anim {
-  to {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ==========================================================================
-   Scroll reveal — toggled by IntersectionObserver in app.js
-   ========================================================================== */
-[data-reveal] {
+/* ─────────────────────────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────────────────────────── */
+[data-reveal="up"],
+[data-reveal="fade"],
+[data-reveal="left"],
+[data-reveal="right"],
+[data-reveal="scale"] {
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  will-change: opacity, transform;
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-reveal="up"] {
-  transform: translateY(40px);
-}
-[data-reveal="down"] {
-  transform: translateY(-40px);
-}
-[data-reveal="left"] {
-  transform: translateX(-50px);
-}
-[data-reveal="right"] {
-  transform: translateX(50px);
-}
-[data-reveal="zoom"] {
-  transform: scale(0.9);
-}
-[data-reveal="fade"] {
-  transform: none;
-}
+[data-reveal="up"]    { transform: translateY(36px); }
+[data-reveal="fade"]  { transform: translateY(0); }
+[data-reveal="left"]  { transform: translateX(-36px); }
+[data-reveal="right"] { transform: translateX(36px); }
+[data-reveal="scale"] { transform: scale(0.93); }
 
 [data-reveal].is-revealed {
   opacity: 1;
-  transform: translate(0, 0) scale(1);
+  transform: none;
 }
 
-/* Stagger children of a group */
-[data-reveal-group] > [data-reveal] {
+/* Stagger delay via CSS custom property set by JS */
+[data-reveal-group] [data-reveal] {
   transition-delay: calc(var(--stagger-index, 0) * 90ms);
 }
 
-/* Respect reduced motion preference */
+/* ─────────────────────────────────────────────────────────────
+   CARD SHIMMER (hover sweep)
+───────────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CARD 3D TILT (enhanced via JS)
+───────────────────────────────────────────────────────────── */
+.feature-card,
+.service-card,
+.sp-card,
+.testimonial-card,
+.about-quality-card,
+.booking-info-card,
+.contact-info-card {
+  transition: transform 0.15s ease, box-shadow 0.3s ease !important;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FEATURE CARD ICON PULSE
+───────────────────────────────────────────────────────────── */
+@keyframes icon-bounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  30%       { transform: scale(1.18) rotate(-6deg); }
+  60%       { transform: scale(1.12) rotate(4deg); }
+}
+
+.feature-card:hover .feature-icon,
+.service-card:hover .service-icon {
+  animation: icon-bounce 0.55s ease;
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   HERO BADGE PING
+───────────────────────────────────────────────────────────── */
+@keyframes ping-ring {
+  0%        { transform: scale(1); opacity: 0.7; }
+  70%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+.hero-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(36, 169, 174, 0.5);
+  animation: ping-ring 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   GRADIENT TEXT ANIMATION
+───────────────────────────────────────────────────────────── */
+.text-gradient,
+.hero-title .accent,
+.hero-title .text-glow {
+  background-size: 200% auto;
+  animation: gradient-flow 4s linear infinite;
+}
+
+@keyframes gradient-flow {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STAT BOX COUNTER POP
+───────────────────────────────────────────────────────────── */
+@keyframes count-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.stat-number.pop {
+  animation: count-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION TITLE UNDERLINE DRAW
+───────────────────────────────────────────────────────────── */
+.section-title {
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CTA BUTTON GLOW PULSE
+───────────────────────────────────────────────────────────── */
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(36, 169, 174, 0.25); }
+  50%       { box-shadow: 0 4px 36px rgba(36, 169, 174, 0.55); }
+}
+
+.btn-primary {
+  animation: btn-glow 3s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TESTIMONIAL CARD HOVER GLOW
+───────────────────────────────────────────────────────────── */
+.testimonial-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 109, 154, 0.18);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FOOTER SOCIAL ICONS — scale pulse
+───────────────────────────────────────────────────────────── */
+.footer-socials a {
+  transition: background var(--transition, 0.3s ease),
+              transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color var(--transition, 0.3s ease),
+              box-shadow 0.25s ease !important;
+}
+
+.footer-socials a:hover {
+  transform: translateY(-5px) scale(1.12) !important;
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────
+   BOOKING FORM FIELD FOCUS GLOW
+───────────────────────────────────────────────────────────── */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  box-shadow: 0 0 0 3px rgba(36, 169, 174, 0.18),
+              0 2px 8px rgba(0, 109, 154, 0.12);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION ENTRY WAVE FOR ALTERNATING SECTIONS
+───────────────────────────────────────────────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.section-head {
+  animation: fade-in-up 0.6s ease both;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SP-CARD (Specialty Cards) hover lift + border glow
+───────────────────────────────────────────────────────────── */
+.sp-card {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease !important;
+}
+
+.sp-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 24px 56px rgba(0, 109, 154, 0.16),
+              0 4px 16px rgba(36, 169, 174, 0.12);
+  border-color: rgba(36, 169, 174, 0.4);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   WHATSAPP FLOAT BUTTON ATTENTION PULSE
+───────────────────────────────────────────────────────────── */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50%       { box-shadow: 0 4px 36px rgba(37, 211, 102, 0.75), 0 0 0 8px rgba(37, 211, 102, 0.1); }
+}
+
+.whatsapp-float {
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL DOWN INDICATOR (hero)
+───────────────────────────────────────────────────────────── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.8; }
+  50%       { transform: translateY(6px); opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FAQ ITEM hover
+───────────────────────────────────────────────────────────── */
+.faq-item {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 24px rgba(0, 109, 154, 0.1);
+  border-color: rgba(36, 169, 174, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STAT ITEM — number entrance
+───────────────────────────────────────────────────────────── */
+.stats-strip .stat-item {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.stats-strip .stat-item:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   REDUCED MOTION — respect user preference
+───────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-  .hero-float-card,
-  .loader-emblem,
-  .whatsapp-float::before,
-  .hero-scroll-line::after {
-    animation: none !important;
-  }
-  * {
-    animation-duration: 0.001ms !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0.01ms !important;
   }
-}
 
-/* Page transition fade-in on load */
-body {
-  animation: fade-in 0.5s ease;
-}
-
-/* Section entrance helper for hero text (auto-run, no observer needed) */
-.hero-badge,
-.hero-title,
-.hero-desc,
-.hero-actions,
-.hero-trust {
-  animation: fade-in 1s ease both;
-}
-.hero-title {
-  animation-delay: 0.1s;
-}
-.hero-desc {
-  animation-delay: 0.2s;
-}
-.hero-actions {
-  animation-delay: 0.3s;
-}
-.hero-trust {
-  animation-delay: 0.4s;
+  [data-reveal="up"],
+  [data-reveal="fade"],
+  [data-reveal="left"],
+  [data-reveal="right"],
+  [data-reveal="scale"] {
+    opacity: 1;
+    transform: none;
+  }
 }

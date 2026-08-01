@@ -253,20 +253,36 @@ body {
     width: 100%;
     box-shadow: none;
     border: none;
-    padding: 8px 0 8px 18px;
+    padding: 12px 0 12px 14px;
     display: none;
     grid-template-columns: 1fr;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    gap: 14px;
+    gap: 16px;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    background: transparent;
   }
 
   .nav-item.has-mega.is-open .mega-menu {
     display: grid;
     transform: none;
+  }
+  
+  .mega-featured {
+    display: none;
+  }
+  
+  .mega-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 12px;
+  }
+  
+  .mega-card {
+    padding: 12px 14px;
+    background: rgba(var(--ear-rgb), 0.04);
   }
 
   .mobile-menu-actions {
