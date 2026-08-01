@@ -49,6 +49,12 @@
     field.addEventListener("change", () => V.clearError(field));
   });
 
+  if (fields.mobile) {
+    fields.mobile.addEventListener("input", function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  }
+
   function runAllValidation() {
     const results = [
       V.validateName(fields.name),
@@ -76,7 +82,7 @@
       "----------------------------------",
       "",
       `*Name:* ${fields.name.value.trim()}`,
-      `*Mobile:* ${fields.mobile.value.trim()}`,
+      `*Mobile:* +91 ${fields.mobile.value.trim()}`,
       `*Email:* ${fields.email.value.trim() || "Not provided"}`,
       `*Clinic:* ${clinicLabel}`,
       `*Preferred Date:* ${formatDate(fields.date.value)}`,

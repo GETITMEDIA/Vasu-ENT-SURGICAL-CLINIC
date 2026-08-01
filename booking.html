@@ -172,7 +172,7 @@
   </header>
 
   <main id="main-content">
-    <section class="page-hero">
+    <section class="page-hero page-hero--booking">
       <div class="container">
         <div class="breadcrumbs">
           <a href="index.html">Home</a>
@@ -216,8 +216,11 @@
 
                     <div class="form-group">
                       <label for="mobile-number">Mobile Number <span class="required-mark">*</span></label>
-                      <input type="tel" id="mobile-number" name="mobile" class="form-control"
-                        placeholder="10-digit mobile number" autocomplete="tel" required />
+                      <div class="phone-input-wrapper" style="position: relative; display: flex; align-items: center;">
+                        <span class="phone-prefix" style="position: absolute; left: 16px; color: var(--color-text-muted); font-weight: 500; font-size: 0.95rem; user-select: none; pointer-events: none;">+91</span>
+                        <input type="tel" id="mobile-number" name="mobile" class="form-control"
+                          placeholder="10-digit number" autocomplete="tel" required maxlength="10" style="padding-left: 52px;" />
+                      </div>
                       <span class="form-error" role="alert"></span>
                     </div>
 

@@ -1421,6 +1421,17 @@ textarea:focus-visible {
   max-width: 800px;
 }
 
+.page-hero--booking {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('../assets/images/booking_hero_bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: calc(var(--header-height) + 90px) 0 110px;
+}
+
+.page-hero--booking::before {
+  display: none;
+}
+
 .page-hero--contact {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url('../assets/images/contact_hero_bg.png');
   background-size: cover;
