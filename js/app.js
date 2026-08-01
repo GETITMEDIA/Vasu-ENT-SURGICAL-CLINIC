@@ -339,8 +339,44 @@
         const id = tab.getAttribute("data-target");
         activatePanel(id, true);
         scrollToPanel(document.getElementById(id), "smooth");
+        // Center the active tab in the scrolling tabs list
+        tab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       });
     });
+
+    // Scroll buttons & fade triggers for tabs list
+    const tabsWrapper = document.querySelector(".specialty-tabs-wrapper");
+    if (tabsWrapper) {
+      const tabList = tabsWrapper.querySelector(".specialty-tabs");
+      const leftBtn = tabsWrapper.querySelector(".tabs-scroll-btn.left");
+      const rightBtn = tabsWrapper.querySelector(".tabs-scroll-btn.right");
+
+      function updateArrows() {
+        if (!tabList) return;
+        const scrollLeft = tabList.scrollLeft;
+        const maxScroll = tabList.scrollWidth - tabList.clientWidth;
+        
+        leftBtn && leftBtn.classList.toggle("is-visible", scrollLeft > 10);
+        rightBtn && rightBtn.classList.toggle("is-visible", scrollLeft < maxScroll - 10);
+        
+        tabsWrapper.classList.toggle("has-scroll-left", scrollLeft > 10);
+        tabsWrapper.classList.toggle("has-scroll-right", scrollLeft < maxScroll - 10);
+      }
+
+      if (leftBtn && rightBtn && tabList) {
+        leftBtn.addEventListener("click", () => {
+          tabList.scrollBy({ left: -240, behavior: "smooth" });
+        });
+        rightBtn.addEventListener("click", () => {
+          tabList.scrollBy({ left: 240, behavior: "smooth" });
+        });
+        tabList.addEventListener("scroll", updateArrows, { passive: true });
+        window.addEventListener("resize", updateArrows);
+        
+        // Run initial check once content is fully loaded
+        setTimeout(updateArrows, 150);
+      }
+    }
 
     // Arrow-key navigation for the tablist (standard ARIA tabs pattern)
     const tabList = document.querySelector(".specialty-tabs");
@@ -361,18 +397,19 @@
         const nextTab = tabArray[nextIndex];
         nextTab.focus();
         activatePanel(nextTab.getAttribute("data-target"), true);
+        nextTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       });
     }
 
     // Precisely snap the given panel to sit just below the tabs bar's
     if (initialSpecialtyHash && document.getElementById(initialSpecialtyHash)) {
       activatePanel(initialSpecialtyHash, false);
-      // .specialty-panel.is-active plays a 600ms entrance animation
-      // (translateY + scale). scrollIntoView()'s target geometry can be
-      // measured mid-animation and land slightly off, so snap into place
-      // right away for immediate feedback, then repeat once the animation
-      // has actually finished for the authoritative final position.
-      const snap = () => scrollToPanel(document.getElementById(initialSpecialtyHash), "auto");
+      const snap = () => {
+        const targetPanel = document.getElementById(initialSpecialtyHash);
+        scrollToPanel(targetPanel, "auto");
+        const activeTab = document.querySelector(`.specialty-tab[data-target="${initialSpecialtyHash}"]`);
+        activeTab && activeTab.scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" });
+      };
       requestAnimationFrame(snap);
       setTimeout(() => {
         snap();
@@ -381,6 +418,20 @@
     } else if (panels.length) {
       activatePanel(panels[0].id, false);
     }
+
+    // Handle hash changes if the user clicks a dropdown link while already on the page
+    window.addEventListener("hashchange", () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && document.getElementById(hash) && document.querySelector(`.specialty-tab[data-target="${hash}"]`)) {
+        activatePanel(hash, false);
+        const targetPanel = document.getElementById(hash);
+        scrollToPanel(targetPanel, "smooth");
+        const activeTab = document.querySelector(`.specialty-tab[data-target="${hash}"]`);
+        if (activeTab) {
+          activeTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        }
+      }
+    });
   }
 
   /* ---------------------------------------------------------------------
@@ -451,4 +502,14 @@
 
     startAutoSlide();
   }
+
+  // Convert specialty hero images to fixed parallax backgrounds
+  document.querySelectorAll(".sp-hero").forEach((hero) => {
+    const img = hero.querySelector(".sp-hero-img");
+    if (img) {
+      const src = img.getAttribute("src");
+      hero.style.backgroundImage = `url('${src}')`;
+      img.style.display = "none";
+    }
+  });
 })();

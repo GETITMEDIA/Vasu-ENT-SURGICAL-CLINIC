@@ -2707,15 +2707,63 @@ textarea.form-control {
 /* ==========================================================================
    Specialties page — modern tabs & detail panels
    ========================================================================== */
+.specialty-tabs-wrapper {
+  position: relative;
+  z-index: 50;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%; /* Prevents wrapper from stretching wider than the viewport */
+}
+
+/* Subtle glass fades on scrollable edges */
+.specialty-tabs-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 48px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+  border-radius: 20px 0 0 20px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.specialty-tabs-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 48px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+  border-radius: 0 20px 20px 0;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.specialty-tabs-wrapper.has-scroll-left::before {
+  opacity: 1;
+}
+
+.specialty-tabs-wrapper.has-scroll-right::after {
+  opacity: 1;
+}
+
 .specialty-tabs {
   display: flex;
   flex-wrap: nowrap;
   gap: 8px;
   justify-content: flex-start;
-  margin-bottom: 50px;
-  position: sticky;
-  top: calc(var(--header-height) + 16px);
-  z-index: 50;
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0; /* Crucial: allows flex item to shrink and scroll horizontally rather than overflow */
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -2732,18 +2780,54 @@ textarea.form-control {
   display: none;
 }
 
-/* Add a subtle fade on edges to indicate scrolling on smaller screens */
-.specialty-tabs::after {
-  content: "";
+/* Scroll chevron buttons */
+.tabs-scroll-btn {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 40px;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--ear-rgb), 0.12);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
   pointer-events: none;
-  border-radius: 0 24px 24px 0;
-  z-index: 2;
+}
+
+.tabs-scroll-btn.left {
+  left: -22px;
+}
+
+.tabs-scroll-btn.right {
+  right: -22px;
+}
+
+.tabs-scroll-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tabs-scroll-btn:hover {
+  background: var(--gradient-primary); /* Orange theme gradient */
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(var(--throat-rgb), 0.35);
+  border-color: transparent;
+}
+
+.tabs-scroll-btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 .specialty-tab {
@@ -2790,16 +2874,16 @@ textarea.form-control {
 }
 
 .specialty-tab.is-active {
-  background: #ffffff;
-  color: var(--color-primary-dark);
-  box-shadow: 0 4px 20px rgba(var(--ear-rgb), 0.08);
-  border-color: rgba(var(--ear-rgb), 0.1);
+  background: linear-gradient(135deg, var(--throat-color) 0%, #ff8e60 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(var(--throat-rgb), 0.25);
+  border-color: transparent;
 }
 
 .specialty-tab.is-active .specialty-tab-icon {
-  background: var(--gradient-accent);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(var(--nose-rgb), 0.2);
+  background: #ffffff;
+  color: var(--throat-color);
+  box-shadow: 0 2px 8px rgba(var(--throat-rgb), 0.15);
 }
 
 .specialty-panel {
@@ -2827,35 +2911,54 @@ textarea.form-control {
 /* ---- Hero block ---- */
 .sp-hero {
   position: relative;
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 40px;
-  align-items: center;
-  border-radius: 36px;
-  padding: 56px 60px;
-  background: var(--gradient-deep);
+  display: block; /* Content stacked on top of background image */
+  border-radius: 32px;
+  background-color: #02293b; /* Rich fallback */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  background-attachment: fixed; /* Desktop parallax background */
   margin-bottom: 48px;
   overflow: hidden;
   isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 50px rgba(var(--ear-rgb), 0.15);
+  min-height: 380px; /* Generous height to show the clinical background */
 }
 
-/* Animated gradient mesh */
+/* Linear-gradient mask overlay: dark navy on left for legibility, transparent on right */
+.sp-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    #02293b 0%, 
+    rgba(2, 41, 59, 0.95) 35%, 
+    rgba(2, 41, 59, 0.6) 65%, 
+    rgba(2, 41, 59, 0.15) 85%, 
+    rgba(2, 41, 59, 0) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ambient color meshes underneath the overlay mask */
 .sp-hero::before {
   content: "";
   position: absolute;
-  inset: -50%;
+  inset: 0;
   z-index: -1;
   background: 
-    radial-gradient(circle at 75% 25%, rgba(var(--nose-rgb), 0.4), transparent 45%),
-    radial-gradient(circle at 25% 75%, rgba(var(--throat-rgb), 0.25), transparent 45%);
+    radial-gradient(circle at 10% 20%, rgba(var(--throat-rgb), 0.18), transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(var(--nose-rgb), 0.15), transparent 50%);
   animation: blob-spin 25s linear infinite;
-  opacity: 0.75;
+  opacity: 0.95;
+  pointer-events: none;
 }
 
 @keyframes blob-spin {
   0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1.05); }
   100% { transform: rotate(360deg) scale(1); }
 }
 
@@ -2866,6 +2969,11 @@ textarea.form-control {
 .sp-hero-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  max-width: 65%; /* limits text to left side */
+  padding: 64px 60px;
+  position: relative;
+  z-index: 2;
 }
 
 .sp-eyebrow {
@@ -2937,16 +3045,15 @@ textarea.form-control {
   flex-shrink: 0;
 }
 
-/* Custom Animated Graphics inside Sp Hero Banners */
+/* Background image covering card completely */
 .sp-hero-graphic {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
   overflow: hidden;
-  z-index: 1;
 }
 
 .sp-hero-graphic svg {
@@ -3440,19 +3547,19 @@ textarea.form-control {
   margin-top: 20px;
 }
 
-/* Specialties page — premium image layout styling */
+/* Specialties page — premium background image styling */
 .sp-hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
-  animation: float-slow 6s ease-in-out infinite alternate;
-  z-index: 1;
+  object-position: right center; /* focus on the right side of the image */
+  border-radius: 32px;
+  border: none;
+  box-shadow: none;
+  z-index: -2;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes float-slow {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-8px) rotate(1deg); }
+.sp-hero:hover .sp-hero-img {
+  transform: scale(1.03);
 }
