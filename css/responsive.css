@@ -47,7 +47,7 @@ body {
   }
 
   .footer-top {
-    grid-template-columns: 1.3fr 0.9fr 1fr 1.1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 36px;
   }
 }
@@ -300,16 +300,9 @@ body {
     margin-inline: unset;
     z-index: 1;
     order: unset;
-    -webkit-mask-image: linear-gradient(180deg, 
-      rgba(0, 0, 0, 0.15) 0%, 
-      rgba(0, 0, 0, 0.25) 50%, 
-      rgba(0, 0, 0, 0.5) 100%
-    ) !important;
-    mask-image: linear-gradient(180deg, 
-      rgba(0, 0, 0, 0.15) 0%, 
-      rgba(0, 0, 0, 0.25) 50%, 
-      rgba(0, 0, 0, 0.5) 100%
-    ) !important;
+    opacity: 0.55;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
 
   .hero-carousel {
@@ -326,6 +319,19 @@ body {
     position: relative;
     z-index: 10;
     text-align: center;
+    background: rgba(0, 30, 50, 0.55);
+    border-radius: 16px;
+    padding: 28px 20px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .hero-title {
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.9);
+  }
+
+  .hero-desc {
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
   }
 
   .hero-desc {
