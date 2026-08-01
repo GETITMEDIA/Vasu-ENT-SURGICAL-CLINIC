@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -196,8 +196,8 @@
 
   <main id="main-content">
     <section class="page-hero page-hero--specialties">
-      <div class="container specialties-hero-grid">
-        <div class="specialties-hero-text">
+      <div class="container">
+        <div class="hero-specialties-content">
           <div class="breadcrumbs">
             <a href="index.html">Home</a>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -218,94 +218,64 @@
             <a href="#otoscope-clinic" class="btn btn-ghost"><span>View All Clinics</span></a>
           </div>
         </div>
-
-        <div class="specialty-orbit" aria-hidden="true">
-          <span class="orbit-ring ring-outer"></span>
-          <span class="orbit-ring ring-inner"></span>
-
-          <div class="orbit-center">
-            <img src="assets/logo/ent-emblem.png" alt="" width="72" height="72" loading="eager" />
-          </div>
-
-          <div class="orbit-chip chip-1">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M12 12v6M9 21h6" /></svg></span>
-            <span>Otoscope</span>
-          </div>
-          <div class="orbit-chip chip-2">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1016 0 8 8 0 00-16 0z" /><path d="M12 8v4l3 2" /></svg></span>
-            <span>Endoscope</span>
-          </div>
-          <div class="orbit-chip chip-3">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" /></svg></span>
-            <span>Vertigo</span>
-          </div>
-          <div class="orbit-chip chip-4">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 014 4v4a4 4 0 01-8 0V7a4 4 0 014-4z" /><path d="M6 12a6 6 0 0012 0M12 18v3" /></svg></span>
-            <span>Voice</span>
-          </div>
-          <div class="orbit-chip chip-5">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0118 0v6" /><rect x="1" y="15" width="6" height="7" rx="2" /><rect x="17" y="15" width="6" height="7" rx="2" /></svg></span>
-            <span>Audiology</span>
-          </div>
-          <div class="orbit-chip chip-6">
-            <span class="orbit-chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4V4z" /></svg></span>
-            <span>Speech</span>
-          </div>
-        </div>
       </div>
+      <svg class="hero-wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,32 C240,80 480,80 720,48 C960,16 1200,16 1440,48 L1440,80 L0,80 Z" />
+      </svg>
     </section>
 
-    <section class="section">
+    <section class="section sp-clinics-section">
+      <div class="sp-clinics-bg-decor" aria-hidden="true"></div>
       <div class="container">
         <!-- Tabs -->
-        <nav class="specialty-tabs" aria-label="Specialty clinic selector">
-          <a href="#otoscope-clinic" class="specialty-tab" data-target="otoscope-clinic">
+        <nav class="specialty-tabs" role="tablist" aria-label="Specialty clinic selector">
+          <a href="#otoscope-clinic" class="specialty-tab is-active" data-target="otoscope-clinic" id="tab-otoscope-clinic" role="tab" aria-controls="otoscope-clinic" aria-selected="true" tabindex="0">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M12 12v6M9 21h6" /></svg></span>
             Otoscope
           </a>
-          <a href="#endoscope-clinic" class="specialty-tab" data-target="endoscope-clinic">
+          <a href="#endoscope-clinic" class="specialty-tab" data-target="endoscope-clinic" id="tab-endoscope-clinic" role="tab" aria-controls="endoscope-clinic" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1016 0 8 8 0 00-16 0z" /><path d="M12 8v4l3 2" /></svg></span>
             Endoscope
           </a>
-          <a href="#vertigo-clinic" class="specialty-tab" data-target="vertigo-clinic">
+          <a href="#vertigo-clinic" class="specialty-tab" data-target="vertigo-clinic" id="tab-vertigo-clinic" role="tab" aria-controls="vertigo-clinic" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" /></svg></span>
             Vertigo
           </a>
-          <a href="#dysphagia-clinic" class="specialty-tab" data-target="dysphagia-clinic">
+          <a href="#dysphagia-clinic" class="specialty-tab" data-target="dysphagia-clinic" id="tab-dysphagia-clinic" role="tab" aria-controls="dysphagia-clinic" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a5 5 0 019-3 5 5 0 019 3c0 4.5-4 8-8 11z" /></svg></span>
             Dysphagia
           </a>
-          <a href="#voice-clinic" class="specialty-tab" data-target="voice-clinic">
+          <a href="#voice-clinic" class="specialty-tab" data-target="voice-clinic" id="tab-voice-clinic" role="tab" aria-controls="voice-clinic" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 014 4v4a4 4 0 01-8 0V7a4 4 0 014-4z" /><path d="M6 12a6 6 0 0012 0M12 18v3" /></svg></span>
             Voice
           </a>
-          <a href="#hearing-assessment" class="specialty-tab" data-target="hearing-assessment">
+          <a href="#hearing-assessment" class="specialty-tab" data-target="hearing-assessment" id="tab-hearing-assessment" role="tab" aria-controls="hearing-assessment" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0118 0v6" /><rect x="1" y="15" width="6" height="7" rx="2" /><rect x="17" y="15" width="6" height="7" rx="2" /></svg></span>
             Hearing Assessment
           </a>
-          <a href="#hearing-aid-trial" class="specialty-tab" data-target="hearing-aid-trial">
+          <a href="#hearing-aid-trial" class="specialty-tab" data-target="hearing-aid-trial" id="tab-hearing-aid-trial" role="tab" aria-controls="hearing-aid-trial" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="14" rx="3" /><path d="M12 16v6" /></svg></span>
             Hearing Aid Trial
           </a>
-          <a href="#hearing-aid-service" class="specialty-tab" data-target="hearing-aid-service">
+          <a href="#hearing-aid-service" class="specialty-tab" data-target="hearing-aid-service" id="tab-hearing-aid-service" role="tab" aria-controls="hearing-aid-service" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 10-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 005.4-5.4l-2.8 2.8-2.5-2.5z" /></svg></span>
             Service &amp; Repairs
           </a>
-          <a href="#home-care" class="specialty-tab" data-target="home-care">
+          <a href="#home-care" class="specialty-tab" data-target="home-care" id="tab-home-care" role="tab" aria-controls="home-care" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l9-7 9 7" /><path d="M5 10v10h14V10" /></svg></span>
             Home Care
           </a>
-          <a href="#speech-therapy" class="specialty-tab" data-target="speech-therapy">
+          <a href="#speech-therapy" class="specialty-tab" data-target="speech-therapy" id="tab-speech-therapy" role="tab" aria-controls="speech-therapy" aria-selected="false" tabindex="-1">
             <span class="specialty-tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4V4z" /></svg></span>
             Speech Therapy
           </a>
         </nav>
 
         <!-- ================= OTOSCOPE CLINIC ================= -->
-        <div class="specialty-panel" id="otoscope-clinic">
+        <div class="specialty-panel" id="otoscope-clinic" role="tabpanel" aria-labelledby="tab-otoscope-clinic" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4" /><path d="M12 12v6M9 21h6" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Ear Care</span>
               <h2>Otoscope Clinic</h2>
               <p>Precise ear examination and diagnosis for infections, wax build-up, hearing changes and everyday ear discomfort.</p>
@@ -314,6 +284,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Accurate diagnosis</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Same-day results</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/otoscope_clinic.png" alt="Otoscope Clinic Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -368,10 +341,10 @@
         </div>
 
         <!-- ================= ENDOSCOPE CLINIC ================= -->
-        <div class="specialty-panel" id="endoscope-clinic">
+        <div class="specialty-panel" id="endoscope-clinic" role="tabpanel" aria-labelledby="tab-endoscope-clinic" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1016 0 8 8 0 00-16 0z" /><path d="M12 8v4l3 2" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Nasal &amp; Throat</span>
               <h2>Endoscope Clinic</h2>
               <p>Advanced nasal and throat endoscopy for accurate, minimally-invasive diagnosis of deeper ENT conditions.</p>
@@ -380,6 +353,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Real-time visualization</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Outpatient procedure</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/endoscope_clinic.png" alt="Endoscope Clinic Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -434,10 +410,10 @@
         </div>
 
         <!-- ================= VERTIGO CLINIC ================= -->
-        <div class="specialty-panel" id="vertigo-clinic">
+        <div class="specialty-panel" id="vertigo-clinic" role="tabpanel" aria-labelledby="tab-vertigo-clinic" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Super Specialty</span>
               <h2>Vertigo Clinic</h2>
               <p>Specialized assessment and management of dizziness, spinning sensations and balance disorders.</p>
@@ -446,6 +422,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Non-surgical options</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Rapid relief</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/vertigo_clinic.png" alt="Vertigo Clinic Balance Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -500,10 +479,10 @@
         </div>
 
         <!-- ================= DYSPHAGIA CLINIC ================= -->
-        <div class="specialty-panel" id="dysphagia-clinic">
+        <div class="specialty-panel" id="dysphagia-clinic" role="tabpanel" aria-labelledby="tab-dysphagia-clinic" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a5 5 0 019-3 5 5 0 019 3c0 4.5-4 8-8 11z" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Super Specialty</span>
               <h2>Dysphagia Clinic <span style="font-weight:400; opacity:.85; font-size: 0.6em;">(Swallowing Disorders)</span></h2>
               <p>Expert evaluation and therapy for swallowing difficulties, ensuring safe and comfortable eating.</p>
@@ -512,6 +491,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Personalized therapy</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Multidisciplinary</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/dysphagia_clinic.png" alt="Dysphagia Clinic Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -566,10 +548,10 @@
         </div>
 
         <!-- ================= VOICE CLINIC ================= -->
-        <div class="specialty-panel" id="voice-clinic">
+        <div class="specialty-panel" id="voice-clinic" role="tabpanel" aria-labelledby="tab-voice-clinic" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 014 4v4a4 4 0 01-8 0V7a4 4 0 014-4z" /><path d="M6 12a6 6 0 0012 0M12 18v3" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Super Specialty</span>
               <h2>Voice Clinic</h2>
               <p>Diagnosis and therapy for voice disorders affecting speech clarity, vocal strength and quality.</p>
@@ -578,6 +560,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Non-invasive first</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Long-term health</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/voice_clinic.png" alt="Voice Clinic Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -632,10 +617,10 @@
         </div>
 
         <!-- ================= HEARING ASSESSMENT ================= -->
-        <div class="specialty-panel" id="hearing-assessment">
+        <div class="specialty-panel" id="hearing-assessment" role="tabpanel" aria-labelledby="tab-hearing-assessment" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0118 0v6" /><rect x="1" y="15" width="6" height="7" rx="2" /><rect x="17" y="15" width="6" height="7" rx="2" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Desirable Audiology</span>
               <h2>Hearing Assessment</h2>
               <p>Comprehensive hearing tests to accurately measure and understand your hearing health.</p>
@@ -644,6 +629,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Precise profile</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>All ages</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/hearing_assessment.png" alt="Hearing Assessment Diagnostics" class="sp-hero-img" />
             </div>
           </div>
 
@@ -698,10 +686,10 @@
         </div>
 
         <!-- ================= HEARING AID TRIAL ================= -->
-        <div class="specialty-panel" id="hearing-aid-trial">
+        <div class="specialty-panel" id="hearing-aid-trial" role="tabpanel" aria-labelledby="tab-hearing-aid-trial" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="14" rx="3" /><path d="M12 16v6" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Desirable Audiology</span>
               <h2>Hearing Aid Trial</h2>
               <p>Try before you decide &mdash; risk-free hearing aid trials matched to your lifestyle and hearing profile.</p>
@@ -710,6 +698,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Multiple brands</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Expert fine-tuning</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/hearing_aid_trial.png" alt="Hearing Aid Trial" class="sp-hero-img" />
             </div>
           </div>
 
@@ -763,10 +754,10 @@
         </div>
 
         <!-- ================= HEARING AID SERVICE & REPAIRS ================= -->
-        <div class="specialty-panel" id="hearing-aid-service">
+        <div class="specialty-panel" id="hearing-aid-service" role="tabpanel" aria-labelledby="tab-hearing-aid-service" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 10-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 005.4-5.4l-2.8 2.8-2.5-2.5z" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Desirable Audiology</span>
               <h2>Hearing Aid Service &amp; Repairs</h2>
               <p>Keep your hearing aid performing at its best with expert servicing, cleaning and repairs.</p>
@@ -775,6 +766,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Quick turnaround</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Genuine parts</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/hearing_aid_service.png" alt="Hearing Aid Service and Repairs" class="sp-hero-img" />
             </div>
           </div>
 
@@ -828,10 +822,10 @@
         </div>
 
         <!-- ================= HOME CARE ================= -->
-        <div class="specialty-panel" id="home-care">
+        <div class="specialty-panel" id="home-care" role="tabpanel" aria-labelledby="tab-home-care" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l9-7 9 7" /><path d="M5 10v10h14V10" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Desirable Audiology</span>
               <h2>Home Care</h2>
               <p>Audiology support brought to your doorstep for elderly or mobility-limited patients.</p>
@@ -840,6 +834,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>No travel required</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Unhurried care</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/home_care.png" alt="Home Care Consultations" class="sp-hero-img" />
             </div>
           </div>
 
@@ -893,10 +890,10 @@
         </div>
 
         <!-- ================= SPEECH THERAPY ================= -->
-        <div class="specialty-panel" id="speech-therapy">
+        <div class="specialty-panel" id="speech-therapy" role="tabpanel" aria-labelledby="tab-speech-therapy" tabindex="0">
           <div class="sp-hero" data-reveal="up">
             <span class="sp-hero-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4V4z" /></svg></span>
-            <div>
+            <div class="sp-hero-text">
               <span class="sp-eyebrow">Desirable Audiology</span>
               <h2>Speech Therapy</h2>
               <p>Structured therapy to improve speech clarity, articulation and communication confidence.</p>
@@ -905,6 +902,9 @@
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Children &amp; adults</span>
                 <span class="sp-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" /></svg>Progress-tracked</span>
               </div>
+            </div>
+            <div class="sp-hero-graphic">
+              <img src="assets/images/speech_therapy.png" alt="Speech Therapy Sessions" class="sp-hero-img" />
             </div>
           </div>
 

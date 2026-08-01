@@ -21,6 +21,18 @@
      Scroll reveal (IntersectionObserver)
      --------------------------------------------------------------------- */
   const revealEls = document.querySelectorAll("[data-reveal]");
+  let revealObserver = null;
+
+  function forceReveal(scopeEl) {
+    if (!scopeEl) return;
+    const targets = scopeEl.matches("[data-reveal]") ? [scopeEl] : [];
+    scopeEl.querySelectorAll("[data-reveal]").forEach((el) => targets.push(el));
+    targets.forEach((el) => {
+      el.classList.add("is-revealed");
+      if (revealObserver) revealObserver.unobserve(el);
+    });
+  }
+
   if ("IntersectionObserver" in window && revealEls.length) {
     document.querySelectorAll("[data-reveal-group]").forEach((group) => {
       Array.from(group.querySelectorAll("[data-reveal]")).forEach((el, i) => {
@@ -28,7 +40,7 @@
       });
     });
 
-    const revealObserver = new IntersectionObserver(
+    revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -268,12 +280,55 @@
   const tabs = document.querySelectorAll(".specialty-tab");
   const panels = document.querySelectorAll(".specialty-panel");
 
+  // Capture and strip a #hash arriving from an external link (e.g. the mega
+  // menu) immediately, before the browser gets a chance to run its own
+  // native fragment-scroll. The native jump doesn't know about the sticky
+  // tabs bar and — worse — can fire late (around window "load", after this
+  // script has already run) and silently override our own corrective
+  // scroll below. Removing the hash up front means there's nothing left
+  // for the browser to act on; we re-add it after positioning ourselves.
+  const initialSpecialtyHash =
+    tabs.length && window.location.hash ? window.location.hash.slice(1) : null;
+  if (initialSpecialtyHash && document.getElementById(initialSpecialtyHash)) {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  }
+
   function activatePanel(id, updateHash) {
     if (!id) return;
-    tabs.forEach((t) => t.classList.toggle("is-active", t.getAttribute("data-target") === id));
+    tabs.forEach((t) => {
+      const isActive = t.getAttribute("data-target") === id;
+      t.classList.toggle("is-active", isActive);
+      t.setAttribute("aria-selected", String(isActive));
+      t.setAttribute("tabindex", isActive ? "0" : "-1");
+    });
     panels.forEach((p) => p.classList.toggle("is-active", p.id === id));
     if (updateHash) {
       history.replaceState(null, "", "#" + id);
+    }
+    // Panels are display:none until active, so elements inside them never
+    // intersect the viewport and the scroll-reveal observer never fires —
+    // reveal the newly active panel's content immediately instead.
+    forceReveal(document.getElementById(id));
+  }
+
+  // .specialty-panel has scroll-margin-top set in CSS to clear the fixed
+  // header + sticky tabs bar, so scrollIntoView() lands in the right place
+  // without us hand-computing that geometry in JS (which proved fragile —
+  // getBoundingClientRect() on the sticky tabs bar only reflects the right
+  // numbers once it has actually engaged its stuck position).
+  function scrollToPanel(panel, behavior) {
+    if (!panel) return;
+    if (behavior === "smooth") {
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // html has `scroll-behavior: smooth` site-wide, which governs every
+      // programmatic scroll (scrollIntoView included) unless overridden —
+      // force a true instant jump here instead.
+      const html = document.documentElement;
+      const prevScrollBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      panel.scrollIntoView({ behavior: "auto", block: "start" });
+      html.style.scrollBehavior = prevScrollBehavior;
     }
   }
 
@@ -283,21 +338,46 @@
         e.preventDefault();
         const id = tab.getAttribute("data-target");
         activatePanel(id, true);
-        const panel = document.getElementById(id);
-        const tabsBar = document.querySelector(".specialty-tabs");
-        if (panel) {
-          const clearance = (tabsBar ? tabsBar.getBoundingClientRect().bottom : 150) + 24;
-          window.scrollTo({
-            top: panel.getBoundingClientRect().top + window.scrollY - clearance,
-            behavior: "smooth",
-          });
-        }
+        scrollToPanel(document.getElementById(id), "smooth");
       });
     });
 
-    const initial = window.location.hash ? window.location.hash.slice(1) : null;
-    if (initial && document.getElementById(initial)) {
-      activatePanel(initial, false);
+    // Arrow-key navigation for the tablist (standard ARIA tabs pattern)
+    const tabList = document.querySelector(".specialty-tabs");
+    if (tabList) {
+      tabList.addEventListener("keydown", (e) => {
+        const tabArray = Array.from(tabs);
+        const currentIndex = tabArray.indexOf(document.activeElement);
+        if (currentIndex === -1) return;
+
+        let nextIndex = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") nextIndex = (currentIndex + 1) % tabArray.length;
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") nextIndex = (currentIndex - 1 + tabArray.length) % tabArray.length;
+        else if (e.key === "Home") nextIndex = 0;
+        else if (e.key === "End") nextIndex = tabArray.length - 1;
+
+        if (nextIndex === null) return;
+        e.preventDefault();
+        const nextTab = tabArray[nextIndex];
+        nextTab.focus();
+        activatePanel(nextTab.getAttribute("data-target"), true);
+      });
+    }
+
+    // Precisely snap the given panel to sit just below the tabs bar's
+    if (initialSpecialtyHash && document.getElementById(initialSpecialtyHash)) {
+      activatePanel(initialSpecialtyHash, false);
+      // .specialty-panel.is-active plays a 600ms entrance animation
+      // (translateY + scale). scrollIntoView()'s target geometry can be
+      // measured mid-animation and land slightly off, so snap into place
+      // right away for immediate feedback, then repeat once the animation
+      // has actually finished for the authoritative final position.
+      const snap = () => scrollToPanel(document.getElementById(initialSpecialtyHash), "auto");
+      requestAnimationFrame(snap);
+      setTimeout(() => {
+        snap();
+        history.replaceState(null, "", "#" + initialSpecialtyHash);
+      }, 650);
     } else if (panels.length) {
       activatePanel(panels[0].id, false);
     }

@@ -369,15 +369,28 @@ body {
   }
 
   .location-card {
-    grid-template-columns: 1fr;
-  }
-
-  .location-info {
-    padding: 40px 36px;
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: auto;
+    border-radius: var(--radius-lg);
   }
 
   .location-map {
-    min-height: 320px;
+    position: relative;
+    height: 380px;
+  }
+
+  .location-info {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    padding: 40px 24px;
+    background: var(--color-white);
   }
 
   .location-map iframe {
@@ -418,13 +431,14 @@ body {
   }
 
   .sp-hero {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     text-align: center;
     padding: 38px 30px;
+    gap: 32px;
   }
 
-  .sp-hero-icon {
-    margin-inline: auto;
+  .sp-hero-graphic {
+    max-height: 160px;
   }
 
   .sp-hero p {
@@ -1212,30 +1226,6 @@ body {
   }
 
   .drawer-close {
-    display: none;
-  }
-}
-
-/* ---- Specialties hero orbit illustration ---- */
-@media (max-width: 992px) {
-  .specialties-hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .specialties-hero-text .breadcrumbs,
-  .specialties-hero-actions {
-    justify-content: center;
-  }
-
-  .specialty-orbit {
-    max-width: 340px;
-    margin-top: 44px;
-  }
-}
-
-@media (max-width: 576px) {
-  .specialty-orbit {
     display: none;
   }
 }
