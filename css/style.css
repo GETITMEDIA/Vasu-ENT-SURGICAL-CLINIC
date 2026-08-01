@@ -1181,19 +1181,13 @@ textarea:focus-visible {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.stat-number {
+.stat-number,
+.stat-suffix {
   font-family: var(--font-heading);
   font-size: 0.72rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
-}
-
-.stat-suffix {
-  font-family: var(--font-heading);
-  font-size: 0.58rem;
-  font-weight: 700;
-  color: var(--nose-color);
 }
 
 .stat-label {
@@ -1794,7 +1788,8 @@ textarea:focus-visible {
   color: #fff;
 }
 
-.stat-number {
+.stat-number,
+.stat-suffix {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: clamp(1.3rem, 2.2vw, 1.8rem);
@@ -2413,8 +2408,8 @@ textarea:focus-visible {
 }
 
 .footer-socials a {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
@@ -2430,8 +2425,8 @@ textarea:focus-visible {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 .footer-socials svg {
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
 }
 
 .footer-col h4 {
@@ -2447,10 +2442,13 @@ textarea:focus-visible {
 }
 
 .footer-top .footer-col:nth-child(2) ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: block;
+  column-count: 2;
   column-gap: 24px;
-  row-gap: 12px;
+}
+.footer-top .footer-col:nth-child(2) li {
+  break-inside: avoid;
+  margin-bottom: 12px;
 }
 
 .footer-col a {
