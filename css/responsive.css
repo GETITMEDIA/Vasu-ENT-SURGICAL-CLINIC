@@ -22,8 +22,9 @@ iframe {
   max-width: 100%;
 }
 
-body {
+html, body {
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ==========================================================================
@@ -616,7 +617,7 @@ body {
   .brand-tag  { font-size: 0.62rem; }
 
   .nav-menu {
-    width: 100vw;
+    width: 100%;
     padding-inline: 20px;
   }
 

@@ -330,6 +330,8 @@ textarea:focus-visible {
 
 .btn-block {
   width: 100%;
+  white-space: normal;
+  text-align: center;
 }
 
 /* Ripple */
@@ -2463,7 +2465,7 @@ textarea:focus-visible {
   inset: 0;
   border-radius: 50%;
   background: #25d366;
-  animation: pulse-ring 2.2s ease-out infinite;
+  animation: pulse-ring-anim 2.2s ease-out infinite;
   z-index: -1;
 }
 
