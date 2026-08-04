@@ -1707,6 +1707,10 @@ textarea:focus-visible {
   align-items: center;
 }
 
+.split-section > * {
+  min-width: 0;
+}
+
 .split-visual {
   position: relative;
 }
@@ -2072,6 +2076,7 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 40px;
   position: relative;
+  overflow: hidden;
   isolation: isolate;
 }
 
@@ -2470,6 +2475,7 @@ textarea:focus-visible {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   padding: 48px;
+  min-width: 0;
 }
 
 .form-grid {
@@ -2483,6 +2489,7 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 8px;
   margin-bottom: 22px;
+  min-width: 0;
 }
 
 .form-group.full {
@@ -2502,6 +2509,7 @@ textarea:focus-visible {
 
 .form-control {
   width: 100%;
+  min-width: 0;
   padding: 14px 18px;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -3172,6 +3180,10 @@ textarea.form-control {
   grid-template-columns: 1.5fr 1fr;
   gap: 32px;
   align-items: start;
+}
+
+.sp-grid > * {
+  min-width: 0;
 }
 
 .sp-panel-card {
