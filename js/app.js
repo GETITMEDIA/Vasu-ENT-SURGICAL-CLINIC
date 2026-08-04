@@ -503,13 +503,4 @@
     startAutoSlide();
   }
 
-  // Convert specialty hero images to fixed parallax backgrounds
-  document.querySelectorAll(".sp-hero").forEach((hero) => {
-    const img = hero.querySelector(".sp-hero-img");
-    if (img) {
-      const src = img.getAttribute("src");
-      hero.style.backgroundImage = `url('${src}')`;
-      img.style.display = "none";
-    }
-  });
 })();

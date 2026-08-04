@@ -60,6 +60,40 @@ body {
     padding-inline: 24px;
   }
 
+  /* Tighten the pill nav so Home/About Us/Special Clinics/Contact
+     never wrap to two lines before the drawer breakpoint kicks in. */
+  .nav-menu {
+    gap: 2px;
+  }
+
+  .nav-link {
+    padding: 12px 10px;
+    font-size: 0.86rem;
+  }
+
+  .nav-phone {
+    font-size: 0.82rem;
+    gap: 6px;
+  }
+
+  .nav-actions {
+    gap: 10px;
+  }
+
+  .nav-cta {
+    margin-left: 4px;
+  }
+
+  .nav-cta .btn {
+    padding-left: 22px;
+    padding-right: 22px;
+    font-size: 0.9rem;
+  }
+
+  .brand-name {
+    font-size: 1.02rem;
+  }
+
   .hero-grid {
     gap: 28px;
   }
@@ -508,6 +542,8 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
 
   .sp-hero-img {
@@ -534,9 +570,22 @@ body {
     padding: calc(var(--header-height) + 50px) 0 70px;
   }
 
-  .page-hero--about,
+  .page-hero--about {
+    padding: calc(var(--header-height) + 60px) 0 80px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../assets/images/about_hero_bg.png') !important;
+  }
+
   .page-hero--contact {
     padding: calc(var(--header-height) + 60px) 0 80px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../assets/images/contact_hero_bg.png') !important;
+  }
+
+  .page-hero--booking {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)), url('../assets/images/booking_hero_bg.png') !important;
+  }
+
+  .page-hero--specialties {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../assets/images/specialties-hero.png') !important;
   }
 }
 
@@ -704,6 +753,13 @@ body {
     z-index: 50;
     width: 100%;
     max-width: 100%;
+  }
+
+  /* The desktop scroll arrows sit outside the wrapper bounds (-22px) which
+     clips them at the viewport edge on narrow screens. Native touch swipe
+     plus the existing fade-edge gradient already signal scrollability. */
+  .tabs-scroll-btn {
+    display: none;
   }
 
   .specialty-tabs {
@@ -1247,16 +1303,16 @@ body {
    inline which beats regular CSS selectors. Use !important to override.
    Applies to: contact quick-cards, about mission/vision cards.
    ------------------------------------------------------------ */
-@media (max-width: 768px) {
-  .features-grid[style] {
-    grid-template-columns: 1fr !important;
-  }
-}
-
 @media (max-width: 992px) {
   /* On tablet let 3-col inline grids show as 2-col */
   .features-grid[style] {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid[style] {
+    grid-template-columns: 1fr !important;
   }
 }
 

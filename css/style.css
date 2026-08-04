@@ -557,6 +557,7 @@ textarea:focus-visible {
   padding: 12px 16px;
   border-radius: var(--radius-full);
   transition: color var(--transition), background var(--transition);
+  white-space: nowrap;
 }
 
 .nav-link:hover,
@@ -2848,11 +2849,10 @@ textarea.form-control {
   position: relative;
   display: block; /* Content stacked on top of background image */
   border-radius: 32px;
-  background-color: #02293b; /* Rich fallback */
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right center;
-  background-attachment: fixed; /* Desktop parallax background */
+  background: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
+    var(--gradient-deep);
+  background-size: 28px 28px, 100% 100%;
   margin-bottom: 48px;
   overflow: hidden;
   isolation: isolate;
@@ -2866,13 +2866,7 @@ textarea.form-control {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, 
-    #02293b 0%, 
-    rgba(2, 41, 59, 0.95) 35%, 
-    rgba(2, 41, 59, 0.6) 65%, 
-    rgba(2, 41, 59, 0.15) 85%, 
-    rgba(2, 41, 59, 0) 100%
-  );
+  background: none;
   z-index: -1;
   pointer-events: none;
 }
@@ -2905,7 +2899,7 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 65%; /* limits text to left side */
+  max-width: 60%; /* limits text to left side */
   padding: 64px 60px;
   position: relative;
   z-index: 2;
@@ -2983,12 +2977,27 @@ textarea.form-control {
 /* Background image covering card completely */
 .sp-hero-graphic {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  right: 0;
+  width: 55%;
   height: 100%;
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.1) 15%, 
+    rgba(0, 0, 0, 0.65) 55%, 
+    rgba(0, 0, 0, 0.95) 85%, 
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.1) 15%, 
+    rgba(0, 0, 0, 0.65) 55%, 
+    rgba(0, 0, 0, 0.95) 85%, 
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 .sp-hero-graphic svg {
