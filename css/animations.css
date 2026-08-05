@@ -290,6 +290,77 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
+   FLOATING EXPERIENCE BADGE (HERO IMAGE OVERLAY)
+───────────────────────────────────────────────────────────── */
+@keyframes badge-blink {
+  0%, 100% { 
+    opacity: 1;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 15px rgba(36, 169, 174, 0.8);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    box-shadow: none;
+    transform: scale(0.98);
+  }
+}
+
+.floating-exp-badge {
+  position: absolute;
+  top: 25%; /* Moved down significantly so it doesn't overlap the navbar */
+  right: 40px;
+  width: 95px;
+  height: 95px;
+  background: linear-gradient(135deg, var(--color-primary, #006d9a), var(--color-accent, #24a9ae));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: badge-blink 1.2s infinite; /* Changed to a faster blink */
+  color: #ffffff;
+  text-align: center;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.floating-exp-badge .badge-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.floating-exp-badge .badge-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.floating-exp-badge .badge-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+@media (max-width: 992px) {
+  .floating-exp-badge {
+    width: 80px;
+    height: 80px;
+    right: 20px;
+    top: 5%;
+  }
+  .floating-exp-badge .badge-num {
+    font-size: 1.2rem;
+  }
+  .floating-exp-badge .badge-text {
+    font-size: 0.65rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
    REDUCED MOTION — respect user preference
 ───────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
