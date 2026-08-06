@@ -3995,3 +3995,81 @@ textarea.form-control {
   position: relative;
   z-index: 10;
 }
+
+/* ==========================================================================
+   Specialties Hub Grid — hub-card component
+   ========================================================================== */
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.hub-card {
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.hub-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: rgba(var(--ear-rgb), 0.25);
+}
+
+.hub-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(var(--nose-rgb), 0.1);
+  color: var(--nose-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.hub-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-primary-dark);
+}
+
+.hub-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.hub-link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ear-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.hub-link:hover {
+  gap: 10px;
+  color: var(--color-primary-dark);
+}
+
+/* Hub emblem image */
+.sp-hero-img--emblem {
+  max-height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+}

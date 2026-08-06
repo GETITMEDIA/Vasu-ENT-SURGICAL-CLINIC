@@ -601,7 +601,7 @@ html, body {
   }
 
   .page-hero--specialties {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../assets/images/specialties-hero.png') !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../assets/images/hero_special_clinic.png') !important;
   }
 }
 

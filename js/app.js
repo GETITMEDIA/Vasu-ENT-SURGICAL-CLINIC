@@ -279,13 +279,6 @@
      --------------------------------------------------------------------- */
   const subtabs = document.querySelectorAll(".subtab-btn, .clinic-subtab-btn");
 
-  function forceReveal(container) {
-    if (!container) return;
-    container.querySelectorAll("[data-reveal]").forEach((el) => {
-      el.classList.add("is-revealed");
-    });
-  }
-
   function activateSubtab(subId) {
     if (!subId) return;
     const activeSubtab = document.querySelector(`[data-subtarget="${subId}"]`);
