@@ -275,163 +275,119 @@
   }
 
   /* ---------------------------------------------------------------------
-     Specialty tabs (specialties.html)
+     Specialty tabs & sub-tabs routing (OTOSCOPE, ENDOSCOPE, SUPER SPECIALITY, DESIRABLE AUDIOLOGY)
      --------------------------------------------------------------------- */
+  const subtabs = document.querySelectorAll(".subtab-btn, .clinic-subtab-btn");
+
+  function forceReveal(container) {
+    if (!container) return;
+    container.querySelectorAll("[data-reveal]").forEach((el) => {
+      el.classList.add("is-revealed");
+    });
+  }
+
+  function activateSubtab(subId) {
+    if (!subId) return;
+    const activeSubtab = document.querySelector(`[data-subtarget="${subId}"]`);
+    if (!activeSubtab) return;
+    
+    // Update subtab buttons — deactivate all siblings in the same container
+    const allSubtabBtns = document.querySelectorAll(".subtab-btn, .clinic-subtab-btn");
+    allSubtabBtns.forEach((btn) => btn.classList.remove("is-active"));
+    activeSubtab.classList.add("is-active");
+
+    // Update subpanels
+    const subpanels = document.querySelectorAll(".specialty-subpanel");
+    subpanels.forEach((panel) => {
+      const isActive = panel.id === subId;
+      panel.classList.toggle("is-active", isActive);
+      if (isActive) {
+        forceReveal(panel);
+      }
+    });
+  }
+
+  if (subtabs.length) {
+    subtabs.forEach((subtab) => {
+      subtab.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = subtab.getAttribute("data-subtarget");
+        activateSubtab(targetId);
+        history.replaceState(null, "", "#" + targetId);
+        
+        // Scroll to the active subpanel
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+          targetPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    // Handle initial hash on load
+    const initialHash = window.location.hash ? window.location.hash.slice(1) : null;
+    if (initialHash && document.getElementById(initialHash)) {
+      activateSubtab(initialHash);
+      setTimeout(() => {
+        const targetPanel = document.getElementById(initialHash);
+        if (targetPanel) {
+          targetPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 400);
+    }
+
+    // Handle hashchange event
+    window.addEventListener("hashchange", () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && document.getElementById(hash)) {
+        activateSubtab(hash);
+        const targetPanel = document.getElementById(hash);
+        if (targetPanel) {
+          targetPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  }
+
+  // Handle traditional tabs for other pages (if any)
   const tabs = document.querySelectorAll(".specialty-tab");
   const panels = document.querySelectorAll(".specialty-panel");
-
-  // Capture and strip a #hash arriving from an external link (e.g. the mega
-  // menu) immediately, before the browser gets a chance to run its own
-  // native fragment-scroll. The native jump doesn't know about the sticky
-  // tabs bar and — worse — can fire late (around window "load", after this
-  // script has already run) and silently override our own corrective
-  // scroll below. Removing the hash up front means there's nothing left
-  // for the browser to act on; we re-add it after positioning ourselves.
-  const initialSpecialtyHash =
-    tabs.length && window.location.hash ? window.location.hash.slice(1) : null;
-  if (initialSpecialtyHash && document.getElementById(initialSpecialtyHash)) {
-    history.replaceState(null, "", window.location.pathname + window.location.search);
-  }
-
-  function activatePanel(id, updateHash) {
-    if (!id) return;
-    tabs.forEach((t) => {
-      const isActive = t.getAttribute("data-target") === id;
-      t.classList.toggle("is-active", isActive);
-      t.setAttribute("aria-selected", String(isActive));
-      t.setAttribute("tabindex", isActive ? "0" : "-1");
-    });
-    panels.forEach((p) => p.classList.toggle("is-active", p.id === id));
-    if (updateHash) {
-      history.replaceState(null, "", "#" + id);
-    }
-    // Panels are display:none until active, so elements inside them never
-    // intersect the viewport and the scroll-reveal observer never fires —
-    // reveal the newly active panel's content immediately instead.
-    forceReveal(document.getElementById(id));
-  }
-
-  // .specialty-panel has scroll-margin-top set in CSS to clear the fixed
-  // header + sticky tabs bar, so scrollIntoView() lands in the right place
-  // without us hand-computing that geometry in JS (which proved fragile —
-  // getBoundingClientRect() on the sticky tabs bar only reflects the right
-  // numbers once it has actually engaged its stuck position).
-  function scrollToPanel(panel, behavior) {
-    if (!panel) return;
-    if (behavior === "smooth") {
-      panel.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      // html has `scroll-behavior: smooth` site-wide, which governs every
-      // programmatic scroll (scrollIntoView included) unless overridden —
-      // force a true instant jump here instead.
-      const html = document.documentElement;
-      const prevScrollBehavior = html.style.scrollBehavior;
-      html.style.scrollBehavior = "auto";
-      panel.scrollIntoView({ behavior: "auto", block: "start" });
-      html.style.scrollBehavior = prevScrollBehavior;
-    }
-  }
-
   if (tabs.length && panels.length) {
+    function activatePanel(id, updateHash) {
+      if (!id) return;
+      tabs.forEach((t) => {
+        const isActive = t.getAttribute("data-target") === id;
+        t.classList.toggle("is-active", isActive);
+        t.setAttribute("aria-selected", String(isActive));
+        t.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+      panels.forEach((p) => p.classList.toggle("is-active", p.id === id));
+      if (updateHash) {
+        history.replaceState(null, "", "#" + id);
+      }
+      forceReveal(document.getElementById(id));
+    }
+
     tabs.forEach((tab) => {
       tab.addEventListener("click", (e) => {
         e.preventDefault();
         const id = tab.getAttribute("data-target");
         activatePanel(id, true);
-        scrollToPanel(document.getElementById(id), "smooth");
-        // Center the active tab in the scrolling tabs list
-        tab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        const targetEl = document.getElementById(id);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     });
 
-    // Scroll buttons & fade triggers for tabs list
-    const tabsWrapper = document.querySelector(".specialty-tabs-wrapper");
-    if (tabsWrapper) {
-      const tabList = tabsWrapper.querySelector(".specialty-tabs");
-      const leftBtn = tabsWrapper.querySelector(".tabs-scroll-btn.left");
-      const rightBtn = tabsWrapper.querySelector(".tabs-scroll-btn.right");
-
-      function updateArrows() {
-        if (!tabList) return;
-        const scrollLeft = tabList.scrollLeft;
-        const maxScroll = tabList.scrollWidth - tabList.clientWidth;
-        
-        leftBtn && leftBtn.classList.toggle("is-visible", scrollLeft > 10);
-        rightBtn && rightBtn.classList.toggle("is-visible", scrollLeft < maxScroll - 10);
-        
-        tabsWrapper.classList.toggle("has-scroll-left", scrollLeft > 10);
-        tabsWrapper.classList.toggle("has-scroll-right", scrollLeft < maxScroll - 10);
+    const initialPanelHash = window.location.hash ? window.location.hash.slice(1) : null;
+    if (initialPanelHash && document.getElementById(initialPanelHash)) {
+      const targetEl = document.getElementById(initialPanelHash);
+      if (targetEl && targetEl.classList.contains("specialty-panel")) {
+        activatePanel(initialPanelHash, false);
       }
-
-      if (leftBtn && rightBtn && tabList) {
-        leftBtn.addEventListener("click", () => {
-          tabList.scrollBy({ left: -240, behavior: "smooth" });
-        });
-        rightBtn.addEventListener("click", () => {
-          tabList.scrollBy({ left: 240, behavior: "smooth" });
-        });
-        tabList.addEventListener("scroll", updateArrows, { passive: true });
-        window.addEventListener("resize", updateArrows);
-        
-        // Run initial check once content is fully loaded
-        setTimeout(updateArrows, 150);
-      }
-    }
-
-    // Arrow-key navigation for the tablist (standard ARIA tabs pattern)
-    const tabList = document.querySelector(".specialty-tabs");
-    if (tabList) {
-      tabList.addEventListener("keydown", (e) => {
-        const tabArray = Array.from(tabs);
-        const currentIndex = tabArray.indexOf(document.activeElement);
-        if (currentIndex === -1) return;
-
-        let nextIndex = null;
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") nextIndex = (currentIndex + 1) % tabArray.length;
-        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") nextIndex = (currentIndex - 1 + tabArray.length) % tabArray.length;
-        else if (e.key === "Home") nextIndex = 0;
-        else if (e.key === "End") nextIndex = tabArray.length - 1;
-
-        if (nextIndex === null) return;
-        e.preventDefault();
-        const nextTab = tabArray[nextIndex];
-        nextTab.focus();
-        activatePanel(nextTab.getAttribute("data-target"), true);
-        nextTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      });
-    }
-
-    // Precisely snap the given panel to sit just below the tabs bar's
-    if (initialSpecialtyHash && document.getElementById(initialSpecialtyHash)) {
-      activatePanel(initialSpecialtyHash, false);
-      const snap = () => {
-        const targetPanel = document.getElementById(initialSpecialtyHash);
-        scrollToPanel(targetPanel, "auto");
-        const activeTab = document.querySelector(`.specialty-tab[data-target="${initialSpecialtyHash}"]`);
-        activeTab && activeTab.scrollIntoView({ behavior: "auto", inline: "center", block: "nearest" });
-      };
-      requestAnimationFrame(snap);
-      setTimeout(() => {
-        snap();
-        history.replaceState(null, "", "#" + initialSpecialtyHash);
-      }, 650);
     } else if (panels.length) {
       activatePanel(panels[0].id, false);
     }
-
-    // Handle hash changes if the user clicks a dropdown link while already on the page
-    window.addEventListener("hashchange", () => {
-      const hash = window.location.hash.substring(1);
-      if (hash && document.getElementById(hash) && document.querySelector(`.specialty-tab[data-target="${hash}"]`)) {
-        activatePanel(hash, false);
-        const targetPanel = document.getElementById(hash);
-        scrollToPanel(targetPanel, "smooth");
-        const activeTab = document.querySelector(`.specialty-tab[data-target="${hash}"]`);
-        if (activeTab) {
-          activeTab.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-        }
-      }
-    });
   }
 
   /* ---------------------------------------------------------------------

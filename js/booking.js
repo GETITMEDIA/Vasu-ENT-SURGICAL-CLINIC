@@ -9,7 +9,7 @@
   if (!form || !window.ENTValidation) return;
 
   const V = window.ENTValidation;
-  const CLINIC_WHATSAPP_NUMBER = "917373611133"; // +91 73736111333 (digits only, country code first)
+  const CLINIC_Phone_NUMBER = "917373611133"; // +91 73736111333 (digits only, country code first)
 
   const fields = {
     name: form.querySelector("#patient-name"),
@@ -73,7 +73,7 @@
     return d.toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" });
   }
 
-  function buildWhatsAppMessage() {
+  function buildPhoneMessage() {
     const clinicLabel = fields.clinic.options[fields.clinic.selectedIndex].text;
     const lines = [
       "----------------------------------",
@@ -109,8 +109,8 @@
     submitBtn && (submitBtn.disabled = true);
     submitBtn && submitBtn.classList.add("is-loading");
 
-    const message = buildWhatsAppMessage();
-    const waUrl = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const message = buildPhoneMessage();
+    const waUrl = `https://wa.me/${CLINIC_Phone_NUMBER}?text=${encodeURIComponent(message)}`;
 
     window.open(waUrl, "_blank", "noopener");
 
@@ -139,3 +139,4 @@
     });
   }
 })();
+

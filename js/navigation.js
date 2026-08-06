@@ -123,8 +123,28 @@
     }
   });
 
+  /* Mega menu sub-item accordion for mobile/touch */
+  document.querySelectorAll(".mega-link-group").forEach((group) => {
+    const head = group.querySelector(".mega-group-head");
+    if (!head) return;
+    head.addEventListener("click", (e) => {
+      const isMobile = window.matchMedia("(max-width: 992px)").matches;
+      if (isMobile) {
+        e.preventDefault();
+        e.stopPropagation();
+        group.classList.toggle("is-expanded");
+      }
+    });
+  });
+
   /* Close mobile nav when a real link is clicked */
   document.querySelectorAll(".nav-menu a:not(.nav-link)").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+  document.querySelectorAll(".mega-sub-link").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+  document.querySelectorAll(".mega-sub-item").forEach((link) => {
     link.addEventListener("click", closeMobileMenu);
   });
   document.querySelectorAll(".nav-cta, .mobile-menu-actions a").forEach((link) => {

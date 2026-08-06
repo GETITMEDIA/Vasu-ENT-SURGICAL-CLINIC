@@ -320,6 +320,21 @@ html, body {
     background: rgba(var(--ear-rgb), 0.04);
   }
 
+  .mega-menu--clean {
+    padding: 0;
+  }
+
+  .mega-grid-clean {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 10px;
+  }
+
+  .mega-link-item,
+  .mega-link-group {
+    background: rgba(var(--ear-rgb), 0.03);
+  }
+
   .mobile-menu-actions {
     margin-top: 24px;
     margin-inline: 20px;
