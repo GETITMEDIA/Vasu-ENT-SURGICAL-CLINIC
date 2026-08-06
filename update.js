@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const files = fs.readdirSync('.').filter(f => f.endsWith('.html'));
-const pattern = /<a([^>]*?href="([^"]+)"[^>]*?class="nav-link"[^>]*?aria-haspopup="true"[^>]*?)>\s*([^<]+?)\s*<svg class="chevron"([^>]+)><path([^>]+)><\/svg>\s*<\/a>/gi;
+// Allow nav-link with other classes like is-active
+const pattern = /<a([^>]*?href="([^"]+)"[^>]*?class="[^"]*nav-link[^"]*"[^>]*?aria-haspopup="true"[^>]*?)>\s*([^<]+?)\s*<svg class="chevron"([^>]+)><path([^>]+)><\/svg>\s*<\/a>/gi;
 
 let totalUpdated = 0;
 

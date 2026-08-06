@@ -1009,14 +1009,25 @@ textarea:focus-visible {
   color: inherit;
   cursor: pointer;
   z-index: 10;
+  pointer-events: none; /* Desktop: let clicks pass to nav-link */
+}
+
+@media (max-width: 992px) {
+  .dropdown-toggle {
+    pointer-events: auto; /* Mobile: make button clickable */
+  }
 }
 
 .nav-item.has-dropdown .nav-link {
   padding-right: 44px;
+  flex-grow: 1;
+  width: 100%;
 }
 
-/* Ensure chevron rotates */
+/* Ensure chevron rotates and has correct size */
 .nav-item.has-dropdown .dropdown-toggle .chevron {
+  width: 14px;
+  height: 14px;
   transition: transform 0.3s ease;
 }
 .nav-item.has-dropdown:hover .dropdown-toggle .chevron {
