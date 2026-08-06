@@ -2064,6 +2064,8 @@ textarea:focus-visible {
 
 .split-visual {
   position: relative;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .split-visual-frame {
