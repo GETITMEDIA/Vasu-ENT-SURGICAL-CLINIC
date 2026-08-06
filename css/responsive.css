@@ -1382,3 +1382,406 @@ html, body {
 }
 
 
+/* ==========================================================================
+   MOBILE HERO — Comprehensive Fixes (all widths ≤ 992px)
+   ========================================================================== */
+
+/* --- Floating badge: reposition inside the hero-visual card on tablet --- */
+@media (max-width: 992px) {
+  .floating-exp-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: auto;
+    top: auto;
+    width: 74px;
+    height: 74px;
+    z-index: 20;
+  }
+  .floating-exp-badge .badge-num {
+    font-size: 1.1rem;
+  }
+  .floating-exp-badge .badge-text {
+    font-size: 0.6rem;
+  }
+
+  /* Show dots + arrows on mobile (hidden by default for desktop) */
+  .hero-visual .carousel-dots {
+    display: flex !important;
+    bottom: 12px;
+    z-index: 25;
+  }
+  .hero-visual .carousel-ctrl {
+    display: flex !important;
+    opacity: 1;
+    visibility: visible;
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* --- Hero stats: keep row layout but allow wrapping on mid-sizes --- */
+@media (max-width: 768px) {
+  .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .stat-box {
+    flex: 1 1 calc(33% - 10px);
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 8px;
+  }
+  .stat-value {
+    justify-content: center;
+  }
+  .stat-number {
+    font-size: 1.2rem;
+  }
+  .stat-suffix {
+    font-size: 1rem;
+  }
+}
+
+/* --- Hero visual: reduce carousel height for smaller phones --- */
+@media (max-width: 576px) {
+  .hero-visual {
+    height: 300px;
+    border-radius: 18px;
+  }
+
+  .floating-exp-badge {
+    width: 64px;
+    height: 64px;
+    bottom: 12px;
+    left: 12px;
+  }
+  .floating-exp-badge .badge-num {
+    font-size: 1rem;
+  }
+  .floating-exp-badge .badge-text {
+    font-size: 0.55rem;
+  }
+
+  /* Stats: full-width row, 3 columns forced */
+  .hero-stats {
+    gap: 8px;
+    width: 100%;
+  }
+  .stat-box {
+    flex: 1 1 calc(33% - 8px);
+    min-width: 80px;
+    padding: 10px 6px;
+  }
+  .stat-number {
+    font-size: 1.1rem;
+  }
+
+  /* Hero title tighter on very small screens */
+  .hero-title {
+    font-size: clamp(1.55rem, 7.5vw, 2rem);
+    line-height: 1.25;
+  }
+
+  /* Hero desc max-width unlock */
+  .hero-desc {
+    max-width: 100%;
+    font-size: 0.92rem;
+  }
+}
+
+/* --- Very small mobile (≤ 400px) --- */
+@media (max-width: 400px) {
+  .hero-visual {
+    height: 260px;
+    border-radius: 14px;
+  }
+
+  .stat-box {
+    flex: 1 1 calc(33% - 6px);
+    padding: 8px 4px;
+  }
+
+  .stat-number {
+    font-size: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.4rem, 7vw, 1.8rem);
+  }
+
+  .hero-actions .btn {
+    max-width: 100%;
+    font-size: 0.88rem;
+    padding: 11px 16px;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+  }
+}
+
+
+/* ==========================================================================
+   HUB GRID — Mobile responsiveness
+   ========================================================================== */
+@media (max-width: 576px) {
+  .hub-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .hub-card {
+    padding: 24px 20px;
+  }
+}
+
+/* ==========================================================================
+   HOVER EFFECTS — Only apply on true pointer devices (desktop/mouse)
+   Touch screens don't have hover; applying hover causes sticky "stuck"
+   states on tap. Use @media (hover: hover) to gate all hover styles.
+   ========================================================================== */
+
+/* Hub card hover — only on real pointer devices */
+@media (hover: hover) {
+  .hub-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    border-color: rgba(var(--ear-rgb), 0.25);
+  }
+
+  .hub-link:hover {
+    gap: 10px;
+    color: var(--color-primary-dark);
+  }
+
+  /* Nav dropdown — desktop hover only */
+  .nav-item.has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-item.has-dropdown:hover .nav-link .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-link:hover {
+    background: rgba(var(--nose-rgb), 0.06);
+    color: var(--ear-color);
+    transform: translateX(4px);
+  }
+
+  /* Stat box hover */
+  .stat-box:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hero trust item hover */
+  .hero-trust-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  /* Feature card hover */
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Service card hover */
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* sp-stat hover */
+  .sp-stat:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+/* ==========================================================================
+   MOBILE DROPDOWN MENU — Convert absolute popup → inline accordion
+   On mobile the dropdown floats outside the drawer (absolute + z-index).
+   Fix: make it static, collapsible inline.
+   ========================================================================== */
+@media (max-width: 992px) {
+
+  /* Kill the absolute-positioned desktop popup behaviour */
+  .nav-item.has-dropdown {
+    position: static;
+  }
+
+  .dropdown-menu {
+    position: static;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: 100%;
+    min-width: unset;
+    margin-top: 0;
+    padding: 0 0 0 14px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    display: none;          /* collapsed by default */
+    flex-direction: column;
+    gap: 0;
+    z-index: auto;
+    overflow: hidden;
+  }
+
+  /* Show when parent has is-open (toggled by navigation.js) 
+     OR when :focus-within (CSS-only tap behavior) */
+  .nav-item.has-dropdown.is-open .dropdown-menu,
+  .nav-item.has-dropdown:focus-within .dropdown-menu {
+    display: flex;
+  }
+
+  /* Chevron rotation for open state */
+  .nav-item.has-dropdown.is-open .nav-link .chevron,
+  .nav-item.has-dropdown:focus-within .nav-link .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-link {
+    font-size: 0.92rem;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(var(--ear-rgb), 0.06);
+    color: var(--color-primary-dark);
+    display: block;
+    border-radius: 0;
+  }
+
+  .dropdown-link:last-child {
+    border-bottom: none;
+    margin-bottom: 8px;
+  }
+}
+
+/* ==========================================================================
+   SP-HERO — Mobile: full-cover image with strong overlay
+   On desktop the .sp-hero-graphic sits right:0, width:55%.
+   On mobile there's not enough width for side-by-side, so expand to
+   full-cover background and darken the overlay so text stays legible.
+   ========================================================================== */
+@media (max-width: 992px) {
+  .sp-hero {
+    min-height: 380px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* Full-cover image panel */
+  .sp-hero-graphic {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .sp-hero-graphic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Strong top-to-bottom gradient overlay for text legibility */
+  .sp-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(2, 41, 59, 0.82) 0%,
+      rgba(2, 41, 59, 0.72) 50%,
+      rgba(2, 41, 59, 0.92) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Text fills full width, centered, above overlay */
+  .sp-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    padding: 36px 24px 40px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sp-eyebrow {
+    align-self: center;
+  }
+
+  .sp-hero h2 {
+    font-size: clamp(1.5rem, 6.5vw, 2.2rem);
+    text-align: center;
+  }
+
+  .sp-hero p {
+    font-size: 0.95rem;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .sp-quickstats {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sp-stat {
+    font-size: 0.82rem;
+    padding: 8px 14px;
+  }
+
+  /* Image fills the graphic area flush — no inner border-radius needed */
+  .sp-hero-img {
+    border-radius: 0;
+    object-position: center center;
+  }
+
+  /* Remove hover scale on touch (no cursor hover on mobile) */
+  .sp-hero:hover .sp-hero-img {
+    transform: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .sp-hero {
+    min-height: 320px;
+    border-radius: 16px;
+  }
+
+  .sp-hero-text {
+    padding: 28px 18px 32px;
+  }
+
+  .sp-hero h2 {
+    font-size: clamp(1.35rem, 7vw, 1.9rem);
+  }
+
+  .sp-hero p {
+    font-size: 0.88rem;
+  }
+}
