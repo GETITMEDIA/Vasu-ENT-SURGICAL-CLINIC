@@ -168,7 +168,7 @@ html, body {
   }
 
   .site-header .brand-name { color: var(--color-primary-dark); }
-  .site-header .brand-tag  { color: var(--color-secondary); }
+
 
   .site-header .nav-link {
     color: var(--color-text);

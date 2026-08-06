@@ -431,8 +431,7 @@ textarea:focus-visible {
     transition: color 0.35s ease;
   }
   .site-header .brand-tag {
-    color: var(--nose-color);
-    transition: color 0.35s ease;
+    display: none;
   }
   .site-header .nav-link {
     color: rgba(255, 255, 255, 0.85);
@@ -472,9 +471,7 @@ textarea:focus-visible {
   .site-header.is-scrolled .brand-name {
     color: var(--color-primary-dark);
   }
-  .site-header.is-scrolled .brand-tag {
-    color: var(--color-secondary);
-  }
+
   .site-header.is-scrolled .nav-link {
     color: var(--color-text);
   }
