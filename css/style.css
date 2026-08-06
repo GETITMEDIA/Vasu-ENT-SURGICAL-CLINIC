@@ -438,16 +438,17 @@ textarea:focus-visible {
     color: rgba(255, 255, 255, 0.85);
     transition: color 0.35s ease, background 0.35s ease;
   }
-  .site-header .nav-link .chevron {
+  .site-header .dropdown-toggle {
     color: rgba(255, 255, 255, 0.85);
-    transition: transform var(--transition), color 0.35s ease;
+    transition: color 0.35s ease;
   }
   .site-header .nav-link:hover,
   .site-header .nav-link.is-active {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.15);
   }
-  .site-header .nav-link:hover .chevron {
+  .site-header .nav-item:hover .dropdown-toggle,
+  .site-header .nav-item:has(.is-active) .dropdown-toggle {
     color: #ffffff;
   }
   .site-header .nav-phone {
@@ -477,7 +478,7 @@ textarea:focus-visible {
   .site-header.is-scrolled .nav-link {
     color: var(--color-text);
   }
-  .site-header.is-scrolled .nav-link .chevron {
+  .site-header.is-scrolled .dropdown-toggle {
     color: var(--color-text);
   }
   .site-header.is-scrolled .nav-link:hover,
@@ -485,7 +486,8 @@ textarea:focus-visible {
     color: var(--ear-color);
     background: rgba(var(--ear-rgb), 0.08);
   }
-  .site-header.is-scrolled .nav-link:hover .chevron {
+  .site-header.is-scrolled .nav-item:hover .dropdown-toggle,
+  .site-header.is-scrolled .nav-item:has(.is-active) .dropdown-toggle {
     color: var(--ear-color);
   }
   .site-header.is-scrolled .nav-phone {
@@ -991,16 +993,13 @@ textarea:focus-visible {
 
 .nav-link-wrapper {
   position: relative;
-  display: flex;
-  width: 100%;
+  display: block;
 }
 
 .dropdown-toggle {
   position: absolute;
-  right: 0;
   top: 0;
   height: 100%;
-  width: 44px;
   background: transparent;
   border: none;
   display: flex;
@@ -1009,19 +1008,36 @@ textarea:focus-visible {
   color: inherit;
   cursor: pointer;
   z-index: 10;
-  pointer-events: none; /* Desktop: let clicks pass to nav-link */
 }
 
-@media (max-width: 992px) {
+/* DESKTOP: chevron sits inside the nav-link pill */
+@media (min-width: 993px) {
   .dropdown-toggle {
-    pointer-events: auto; /* Mobile: make button clickable */
+    right: 8px;
+    width: 14px;
+    pointer-events: none;
+  }
+  .nav-item.has-dropdown .nav-link {
+    padding-right: 26px;
   }
 }
 
-.nav-item.has-dropdown .nav-link {
-  padding-right: 44px;
-  flex-grow: 1;
-  width: 100%;
+/* MOBILE: chevron is a large 44px tap target on the right edge */
+@media (max-width: 992px) {
+  .nav-link-wrapper {
+    display: flex;
+    width: 100%;
+  }
+  .dropdown-toggle {
+    right: 0;
+    width: 44px;
+    pointer-events: auto;
+  }
+  .nav-item.has-dropdown .nav-link {
+    padding-right: 44px;
+    flex-grow: 1;
+    width: 100%;
+  }
 }
 
 /* Ensure chevron rotates and has correct size */

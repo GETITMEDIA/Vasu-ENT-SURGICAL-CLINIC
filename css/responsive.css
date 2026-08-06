@@ -180,8 +180,12 @@ html, body {
     background: rgba(var(--ear-rgb), 0.08);
   }
 
-  .site-header .nav-link .chevron {
+  .site-header .dropdown-toggle {
     color: var(--color-text);
+  }
+  .site-header .nav-item:hover .dropdown-toggle,
+  .site-header .nav-item:has(.is-active) .dropdown-toggle {
+    color: var(--ear-color);
   }
 
   .nav-phone { display: none; }
