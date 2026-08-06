@@ -2064,19 +2064,22 @@ textarea:focus-visible {
 
 .split-visual {
   position: relative;
-  max-width: 420px;
+  max-width: 450px;
   margin: 0 auto;
 }
 
 .split-visual-frame {
   border-radius: var(--radius-lg);
   overflow: hidden;
+  aspect-ratio: 4 / 4.2; /* Taller than square, but wider than original 4:5 */
   box-shadow: var(--shadow-lg);
 }
 
 .split-visual-frame img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom; /* Prevents the road from getting hidden */
   display: block;
   transition: transform 0.7s ease;
 }
