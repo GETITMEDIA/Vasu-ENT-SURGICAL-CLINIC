@@ -2073,7 +2073,7 @@ textarea:focus-visible {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  aspect-ratio: 4/3.2;
+  aspect-ratio: 4 / 5; /* Matches 900x1125 dimensions */
 }
 
 .split-visual-frame img {
