@@ -989,11 +989,37 @@ textarea:focus-visible {
   transform: translateX(4px);
 }
 
+.nav-link-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.dropdown-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 44px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav-item.has-dropdown .nav-link {
+  padding-right: 44px;
+}
+
 /* Ensure chevron rotates */
-.nav-item.has-dropdown .nav-link .chevron {
+.nav-item.has-dropdown .dropdown-toggle .chevron {
   transition: transform 0.3s ease;
 }
-.nav-item.has-dropdown:hover .nav-link .chevron {
+.nav-item.has-dropdown:hover .dropdown-toggle .chevron {
   transform: rotate(180deg);
 }
 

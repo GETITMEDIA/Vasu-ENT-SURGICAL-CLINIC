@@ -1567,7 +1567,7 @@ html, body {
     transform: translateX(-50%) translateY(0);
   }
 
-  .nav-item.has-dropdown:hover .nav-link .chevron {
+  .nav-item.has-dropdown:hover .dropdown-toggle .chevron {
     transform: rotate(180deg);
   }
 
@@ -1651,8 +1651,8 @@ html, body {
   }
 
   /* Chevron rotation for open state */
-  .nav-item.has-dropdown.is-open .nav-link .chevron,
-  .nav-item.has-dropdown:focus-within .nav-link .chevron {
+  .nav-item.has-dropdown.is-open .dropdown-toggle .chevron,
+  .nav-item.has-dropdown:focus-within .dropdown-toggle .chevron {
     transform: rotate(180deg);
   }
 
