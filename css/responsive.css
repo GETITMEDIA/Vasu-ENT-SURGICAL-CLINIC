@@ -1789,3 +1789,10 @@ html, body {
     font-size: 0.88rem;
   }
 }
+
+@media (max-width: 992px) {
+  .brand-name .mobile-br {
+    display: none;
+  }
+}
+

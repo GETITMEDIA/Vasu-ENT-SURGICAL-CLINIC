@@ -82,6 +82,30 @@
     });
   });
 
+  /* Standard Dropdown toggle for mobile */
+  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      const parentItem = toggle.closest(".has-dropdown");
+      if (parentItem) {
+        const willOpen = !parentItem.classList.contains("is-open");
+        
+        // Close other dropdowns if needed
+        document.querySelectorAll(".has-dropdown").forEach((item) => {
+          if (item !== parentItem) item.classList.remove("is-open");
+        });
+        
+        parentItem.classList.toggle("is-open", willOpen);
+
+        // Remove focus so :focus-within doesn't inadvertently keep it open
+        if (!willOpen) {
+          toggle.blur();
+        }
+      }
+    });
+  });
+
   /* Mega menu: gap-tolerant hover on desktop.
      The dropdown is position:fixed and sits a few pixels below the
      trigger, so a plain CSS :hover chain breaks while the cursor
